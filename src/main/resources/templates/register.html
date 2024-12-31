@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>VoxPopulity</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <h1>User register</h1>
+        <p th:text="${message}"></p>
+        <form id="user-register" action="/submit-register" method="post">
+            <label for="name">Nombre</label>
+            <input type="text" name="name" placeholder="Inserte su nombre">
+            
+            <label for="name">Apellidos</label>
+            <input type="text" name="last_name" placeholder="Inserte sus apellidos">
+            
+            <label for="name">Nombre de usuario</label>
+            <input type="text" name="username" placeholder="Inserte su nombre de usuario">
+            
+            <label for="name">Correo</label>
+            <input type="text" name="email" placeholder="Inserte su correo">
+                        
+            <label for="name">Contraseña</label>
+            <input type="password" name="password" placeholder="Ingrese su contraseña">
+            
+            <label for="name">Repetir contraseña</label>
+            <input type="password" name="pass" placeholder="Vuelva a ingresar su contraseña">
+            
+            <input type="submit" value="Registrarme" name="btn_form" />
+        </form>
+        
+        <script src="RegisterScript.js"></script>
+    </body>
+</html>
