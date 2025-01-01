@@ -1,4 +1,4 @@
-//Metodo para comprobar que ningun campo se ingrese vacio y con su respectivo formato (email)
+//Metodo para comprobar que ningun campo se ingrese vacio y con su respectivo formato 
 const formRegister = document.getElementById("user-register");
 
 formRegister.addEventListener('submit', (e) => {
@@ -24,7 +24,7 @@ formRegister.addEventListener('submit', (e) => {
 // Retorna true si algún campo del form está vacío
 
 function testNull(...fields) {
-    return fields.some(field => field === ""); 
+    return fields.some(field => field === "");
 }
 
 //Metodo para cancelar el envio del formulario si las contraseñas no son iguales

@@ -15,7 +15,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
 
-    List<String> exclude = new ArrayList<>(List.of("/login", "/register", "/login-submit"));
+    List<String> exclude = new ArrayList<>(List.of("/login", "/register", "/login-submit", "/submit-register", "/js/**", "/styles/**"));
 
     @Autowired
     private SessionInterceptor sessionInterceptor;
