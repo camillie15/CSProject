@@ -1,6 +1,6 @@
 package com.cs.project.controller;
 
-import com.cs.project.service.UserServiceImpl;
+import com.cs.project.service.User.UserServiceImpl;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

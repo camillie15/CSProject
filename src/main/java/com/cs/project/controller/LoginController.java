@@ -1,6 +1,6 @@
 package com.cs.project.controller;
 
-import com.cs.project.service.UserServiceImpl;
+import com.cs.project.service.User.UserServiceImpl;
 import jakarta.servlet.http.HttpSession;
 import java.util.Map;
 import lombok.extern.slf4j.Slf4j;
