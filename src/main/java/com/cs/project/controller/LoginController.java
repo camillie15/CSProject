@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Slf4j
 public class LoginController {
 
-    private UserServiceImpl userService;
+    private final UserServiceImpl userService;
 
     @Autowired
     public LoginController(UserServiceImpl userService) {
@@ -31,10 +31,13 @@ public class LoginController {
      * Vista y control del login del usuario
      *
      * @param model mensaje de presnetación
-     * @return vista login.hmtl
+     * @return vista login si no hay una session creada, path= home si hay una session creada
      */
     @GetMapping("/login")
-    public String loginView(Model model) {
+    public String loginView(HttpSession session, Model model) {
+        if(session.getAttribute("userIdLogged") != null){
+            return "redirect:/home";
+        }
         String message = "Ingrese su usuario";
         model.addAttribute("message", message);
         return "login";
@@ -45,6 +48,7 @@ public class LoginController {
      *
      * @param allParams obtener paametros del formulario
      * @param session
+     * @param model
      * @return retorna al dashboard si se encuentra al usuario y regresa al
      * login si no lo encuentra
      */
@@ -52,13 +56,25 @@ public class LoginController {
     public String loginRequest(@RequestParam Map<String, String> allParams, HttpSession session, Model model) {
         String email = allParams.get("email");
         String password = allParams.get("password");
-        log.info("User Service");
+        log.info("Login submit");
         if (!userService.UserAuthenticate(email, password, session)) {
             String message = "Usuario no encontrado";
             model.addAttribute("message", message);
             return "/login";
         } else {
-            return "redirect:/register";
+            return "redirect:/home";
         }
+    }
+    
+    
+    /**
+     * 
+     * @param session
+     * @return retorna a la ruta del login
+     */
+    @GetMapping("/logout")
+    public String logout(HttpSession session){
+        session.removeAttribute("userIdLogged");
+        return "redirect:/login";
     }
 }

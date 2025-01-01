@@ -33,11 +33,13 @@ public class UserServiceImpl implements UserService, UserLogin {
 
     @Override
     public boolean UserAuthenticate(String email, String password, HttpSession session) {
-        log.info("User Service");
+        log.info("SERVICE UserAuthenticate");
         int value = userRepository.findUser(email, password);
-        if (value > 0) {            
+        if (value >= 0) {
             session.setAttribute("userIdLogged", value);
             return true;
-        } else return false;        
+        } else {
+            return false;
+        }
     }
 }

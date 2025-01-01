@@ -7,7 +7,4 @@ package com.cs.project.exception;
  */
 public class DataBaseEjecuteException extends RuntimeException {
 
-    public DataBaseEjecuteException() {
-    }
-    
 }
