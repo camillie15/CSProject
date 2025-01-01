@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Home</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">    </head>
+    <body>
+        <header>
+            <a href="#">
+                <button>Create post</button>
+            </a>
+        </header>
+        <main>
+            <div>
+                <div th:each="post : ${posts}">
+                    <p><strong></strong> <span th:text="${post.userName}"></span></p>
+                    <p th:text="${#temporals.format(post.createdDate, 'dd-MM-yyyy')}"></p>
+                    <p th:text="${post.tittle}"></p>
+                    <p th:text="${post.content}"></p>
+                    <div>
+                        <i class="heart-icon bi bi-heart"></i>
+                        <a href="#">
+                            <i class="bi bi-chat-dots"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <script>
+            const heartIcons = document.querySelectorAll('.heart-icon');
+            
+            heartIcons.forEach(icon => {
+                icon.addEventListener('click', (event) => {
+                    const targetIcon = event.target;
+                    if (targetIcon.classList.contains('bi-heart')) {
+                        targetIcon.classList.remove('bi-heart');
+                        targetIcon.classList.add('bi-heart-fill');
+                    } else {
+                        targetIcon.classList.remove('bi-heart-fill');
+                        targetIcon.classList.add('bi-heart');
+                    }
+                });
+            });
+        </script>
+    </body>
+</html>
