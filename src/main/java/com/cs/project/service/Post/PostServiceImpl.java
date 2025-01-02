@@ -32,6 +32,17 @@ public class PostServiceImpl implements PostService{
     public List<Post> reviewExistentPosts() {
         return postRepository.getAllPosts();
     }
+
+    @Override
+    public void reviewDataPostForCreate(String tittle, String content, HttpSession session) {
+        int userId = (int) session.getAttribute("userIdLogged");
+        Post post = new Post();
+        post.setTittle(tittle);
+        post.setContent(content);
+        post.setCreatedDate( LocalDate.now());
+        post.setUserId(userId);
+        postRepository.createPost(post);
+    }
     
     
 }

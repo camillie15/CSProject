@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Post</title>
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.6.0/uicons-regular-straight/css/uicons-regular-straight.css'>
+    <script src="js/CreatePostScript.js" defer=""></script>
+</head>
+<body>
+    <main>
+        <h2>Create a new post</h2>
+        <form id="form-create-post" th:action="@{/createPost}" th:object="${post}" method="POST">
+            <label for="tittle">Titulo</label>
+            <input type="text" id="tittle" placeholder="Titulo" th:field="*{tittle}" />
+            <br><br>
+            <label for="content">Contenido</label>
+            <textarea id="content" placeholder="Contenido" th:field="*{content}"></textarea>
+            <br><br>
+            <button type="submit">Create Post</button>
+        </form>
+    </main>
+</body>
+</html>

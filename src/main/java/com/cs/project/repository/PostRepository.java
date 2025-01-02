@@ -34,4 +34,16 @@ public class PostRepository {
         }
         
     }
+    
+    public boolean createPost(Post post){
+        try{
+            String query =  "INSERT INTO Posts (tittle, content, userId, createdDate) VALUES(?, ?, ?, ?)";
+            jdbcTemplate.update(query, post.getTittle(), post.getContent(), post.getUserId(), post.getCreatedDate());
+            log.info("Post creado exitosamente");
+            return true;
+        }catch(Exception e){
+            log.error("Error: " + e);
+            return false;
+        }
+    }
 }
