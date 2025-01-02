@@ -26,7 +26,7 @@ public class PostRepository {
      */
     public List<Post> getAllPosts(){
         try{
-            String query = "SELECT p.*, u.name AS userName FROM Posts p " +
+            String query = "SELECT p.*, u.username AS userName FROM Posts p " +
                    "JOIN Users u ON p.userId = u.userId";
             return jdbcTemplate.query(query, new PostRowMapper());
         }catch(DataBaseEjecuteException e){
@@ -35,15 +35,17 @@ public class PostRepository {
         
     }
     
-    public boolean createPost(Post post){
+    /**
+     * Método que ejecuta una sentencia SQL para agregar el post registrado por el usuario a la tabla en la DB
+     * @param post post a registrar
+     */
+    public void createPost(Post post){
         try{
             String query =  "INSERT INTO Posts (tittle, content, userId, createdDate) VALUES(?, ?, ?, ?)";
             jdbcTemplate.update(query, post.getTittle(), post.getContent(), post.getUserId(), post.getCreatedDate());
             log.info("Post creado exitosamente");
-            return true;
         }catch(Exception e){
             log.error("Error: " + e);
-            return false;
         }
     }
 }
