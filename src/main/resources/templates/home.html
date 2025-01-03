@@ -24,7 +24,7 @@
                     <p th:text="${post.content}"></p>
                     <div>
                         <i class="heart-icon bi bi-heart"></i>
-                        <a href="#">
+                        <a th:href="@{/comments/{id}(id=${post.postId})}">
                             <i class="bi bi-chat-dots"></i>
                         </a>
                     </div>

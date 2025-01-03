@@ -3,31 +3,23 @@ package com.cs.project.model;
 import java.time.LocalDate;
 
 /**
- * Clase modelo Post
+ * Clase Modelo Comment
  * @author Camillie Ayovi Villafuerte
  */
-public class Post {
-    private int postId;
-    private String tittle;
+public class Comment {
+    private int commentId;
     private String content;
+    private int postId;
     private int userId;
-    private String userName;
     private LocalDate createdDate;
+    private String userName;
 
-    public int getPostId() {
-        return postId;
+    public int getCommentId() {
+        return commentId;
     }
 
-    public void setPostId(int postId) {
-        this.postId = postId;
-    }
-
-    public String getTittle() {
-        return tittle;
-    }
-
-    public void setTittle(String tittle) {
-        this.tittle = tittle;
+    public void setCommentId(int commentId) {
+        this.commentId = commentId;
     }
 
     public String getContent() {
@@ -36,6 +28,14 @@ public class Post {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public int getPostId() {
+        return postId;
+    }
+
+    public void setPostId(int postId) {
+        this.postId = postId;
     }
 
     public int getUserId() {
@@ -53,7 +53,7 @@ public class Post {
     public void setCreatedDate(LocalDate createdDate) {
         this.createdDate = createdDate;
     }
-    
+
     public String getUserName() {
         return userName;
     }
@@ -61,4 +61,5 @@ public class Post {
     public void setUserName(String userName) {
         this.userName = userName;
     }
+    
 }

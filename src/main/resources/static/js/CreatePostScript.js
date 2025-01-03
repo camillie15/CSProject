@@ -1,3 +1,4 @@
+//Validación de datos ingresados
 const formPost = document.getElementById("form-create-post");
 
 formPost.addEventListener("submit", (event) => {

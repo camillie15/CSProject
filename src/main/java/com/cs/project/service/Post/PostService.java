@@ -6,9 +6,10 @@ import java.util.List;
 
 /**
  * Interfaz que define métodos para la interacción con los posts
- * @author camil
+ * @author Camillie Ayovi Villafuerte
  */
 public interface PostService {
     List<Post> reviewExistentPosts();
     void reviewDataPostForCreate(String tittle, String content, HttpSession session);
+    Post reviewExistentPost(int idPost);
 }

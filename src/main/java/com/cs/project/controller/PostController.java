@@ -12,15 +12,24 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 /**
- *
- * @author camil
+ * Clase que maneja las solicitudes HTTP de los post
+ * @author Camillie Ayovi Villafuerte
  */
 @Controller
 public class PostController {
-        
-    @Autowired
-    private PostServiceImpl postService;
+    
+    private final PostServiceImpl postService;
 
+    @Autowired
+    public PostController(PostServiceImpl postService) {
+        this.postService = postService;
+    }
+    
+    /**
+     * Método para la visualización del formulario para la creación del post
+     * @param model pasa el formulario a la vista
+     * @return retorna la plantilla de crear post
+     */
     @GetMapping("/createPost")
     public String createPostForm(Model model) {
         Post post = new Post();
@@ -28,6 +37,12 @@ public class PostController {
         return "createPost";
     }
     
+    /**
+     * Método que toma los datos de la solicitud POST para la creación del post
+     * @param parameters parámetros de la solicitud
+     * @param session sesión activada por el usuario
+     * @return retorna la plantilla de crear post
+     */
     @PostMapping("/createPost")
     public String createPost(@RequestParam Map<String, String> parameters, HttpSession session){
         String tittle = parameters.get("tittle");
