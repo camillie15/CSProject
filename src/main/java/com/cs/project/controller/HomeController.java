@@ -10,16 +10,20 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 /**
  * Clase que maneja las solicitudes HTTP de la página home
- * @author camil
+ * @author Camillie Ayovi Villafuerte
  */
 @Controller
 public class HomeController {
     
+    private final PostServiceImpl postService;
+
     @Autowired
-    private PostServiceImpl postService;
+    public HomeController(PostServiceImpl postService) {
+        this.postService = postService;
+    }
 
     /**
-     * Método que obtiene la lista de posts y la agrega al modelo
+     * Método para la obtención de la lista de posts registrados
      * @param model pasa la lista a la vista
      * @return retorna la plantilla home
      */

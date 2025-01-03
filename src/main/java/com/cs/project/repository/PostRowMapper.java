@@ -7,7 +7,7 @@ import org.springframework.jdbc.core.RowMapper;
 
 /**
  * Clase que implementa la interfaz RowMapper para mapear los resultados del query a un objeto Post
- * @author camil
+ * @author Camillie Ayovi Villafuerte
  */
 public class PostRowMapper implements RowMapper<Post>{
 
