@@ -5,12 +5,13 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="styles/styles.css"/>
+        <script src="js/LoginScript.js" defer=""></script>
     </head>
     <body>
         <div>Login section</div>
         <p th:text="${message}"></p>
         <p>change</p>
-        <form action="/login-submit" method="post">
+        <form id="login-form" action="/login-submit" method="post">
             <label for="email">Correo electronico</label>
             <input type="text" name="email" placeholder="Ingrese su correo">
             <label for="password">Contraseña</label>

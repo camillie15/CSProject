@@ -27,8 +27,12 @@ public class UserServiceImpl implements UserService, UserLogin {
 
     @Override
     public boolean userRegister(String name, String lastName, String email, String userName, String password) {
-        User user = new User(name, lastName, email, userName, password);
-        return userRepository.userRegister(user);
+        if (!verifyUserRegister(email, userName)) {
+            User user = new User(name, lastName, email, userName, password);
+            return userRepository.userRegister(user);
+        } else {
+            return false;
+        }
     }
 
     @Override
@@ -41,5 +45,9 @@ public class UserServiceImpl implements UserService, UserLogin {
         } else {
             return false;
         }
+    }
+
+    private boolean verifyUserRegister(String email, String userName) {
+        return userRepository.findEmail(email) || userRepository.findUserName(userName);
     }
 }

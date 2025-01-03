@@ -6,6 +6,7 @@ import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -57,5 +58,42 @@ public class UserRepository {
             return -1;
         }
     }
+    
+    /**
+     * Buscar si existe en usuario con ese email registrado
+     * @param email email a buscar en el sistema 
+     * @return true si existe, false si no existe
+     */
+    public boolean findEmail(String email) {
+        String script = "SELECT Count(*) FROM Users WHERE email = ?";
+        try {
+            int value = jdbcTemplate.queryForObject(script, Integer.class, email);
+            log.info("Email user found" + value);
+            return value > 0;
+        } catch (EmptyResultDataAccessException e) {
+            return false;
+        } catch (DataAccessException e) {
+            return false;
 
+        }
+    }
+    
+        /**
+     * Buscar si existe en usuario con ese email registrado
+     * @param userName username a buscar en el sistema
+     * @return true si existe, false si no existe
+     */
+    public boolean findUserName(String userName) {
+        String script = "SELECT Count(*) FROM Users WHERE username = ?";
+        try {
+            int value = jdbcTemplate.queryForObject(script, Integer.class, userName);
+            log.info("UserName user found" + value);
+            return value > 0;
+        } catch (EmptyResultDataAccessException e) {
+            return false;
+        } catch (DataAccessException e) {
+            return false;
+        }
+    }
+    
 }
