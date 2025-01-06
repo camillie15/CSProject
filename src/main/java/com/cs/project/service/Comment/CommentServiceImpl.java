@@ -3,7 +3,7 @@ package com.cs.project.service.Comment;
 import com.cs.project.model.Comment;
 import com.cs.project.repository.CommentRepository;
 import jakarta.servlet.http.HttpSession;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +36,7 @@ public class CommentServiceImpl implements CommentService{
         Comment comment = new Comment();
         comment.setContent(content);
         comment.setPostId(postId);
-        comment.setCreatedDate( LocalDate.now());
+        comment.setCreatedDate( LocalDateTime.now());
         comment.setUserId(userId);
         commentRepository.createComment(comment);
     }
