@@ -3,7 +3,7 @@ package com.cs.project.service.Post;
 import com.cs.project.model.Post;
 import com.cs.project.repository.PostRepository;
 import jakarta.servlet.http.HttpSession;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,7 +43,7 @@ public class PostServiceImpl implements PostService{
         Post post = new Post();
         post.setTittle(tittle);
         post.setContent(content);
-        post.setCreatedDate( LocalDate.now());
+        post.setCreatedDate(LocalDateTime.now());
         post.setUserId(userId);
         postRepository.createPost(post);
     }

@@ -72,8 +72,8 @@ public class PostRepository {
      */
     public List<Post> getPostsByUser(int userId) {
         String query = "SELECT p.*, u.username AS userName FROM Posts p " +
-                   "JOIN Users u ON p.userId = u.userId"
-                + "WHERE userId = ?";
+                   "JOIN Users u ON p.userId = u.userId "
+                + "WHERE p.userId = ?";
         List<Post> posts = jdbcTemplate.query(query, new PostRowMapper(), userId);
         return posts != null ? posts : new ArrayList<>();
     }
