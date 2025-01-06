@@ -1,6 +1,6 @@
 package com.cs.project.model;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  * Clase Modelo Comment
@@ -11,7 +11,7 @@ public class Comment {
     private String content;
     private int postId;
     private int userId;
-    private LocalDate createdDate;
+    private LocalDateTime createdDate;
     private String userName;
 
     public int getCommentId() {
@@ -46,11 +46,11 @@ public class Comment {
         this.userId = userId;
     }
     
-    public LocalDate getCreatedDate() {
+    public LocalDateTime getCreatedDate() {
         return createdDate;
     }
 
-    public void setCreatedDate(LocalDate createdDate) {
+    public void setCreatedDate(LocalDateTime createdDate) {
         this.createdDate = createdDate;
     }
 
