@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
  * Controlador de la vista del login
@@ -34,12 +35,10 @@ public class LoginController {
      * @return vista login si no hay una session creada, path= home si hay una session creada
      */
     @GetMapping("/login")
-    public String loginView(HttpSession session, Model model) {
+    public String loginView(HttpSession session) {
         if(session.getAttribute("userIdLogged") != null){
             return "redirect:/home";
         }
-        String message = "Ingrese su usuario";
-        model.addAttribute("message", message);
         return "login";
     }
 
@@ -53,14 +52,14 @@ public class LoginController {
      * login si no lo encuentra
      */
     @PostMapping("/login-submit")
-    public String loginRequest(@RequestParam Map<String, String> allParams, HttpSession session, Model model) {
+    public String loginRequest(@RequestParam Map<String, String> allParams, HttpSession session, RedirectAttributes redirect) {
         String email = allParams.get("email");
         String password = allParams.get("password");
         log.info("Login submit");
         if (!userService.UserAuthenticate(email, password, session)) {
             String message = "Usuario no encontrado";
-            model.addAttribute("message", message);
-            return "/login";
+            redirect.addFlashAttribute("message", message);
+            return "redirect:/login";
         } else {
             return "redirect:/home";
         }

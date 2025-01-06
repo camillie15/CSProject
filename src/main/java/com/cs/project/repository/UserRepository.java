@@ -32,7 +32,38 @@ public class UserRepository {
         try {
             String script = "INSERT INTO Users (name, lastName, email, username, password) VALUES (?,?,?,?,?)";
             jdbcTemplate.update(script, user.getName(), user.getLastName(), user.getEmail(), user.getUserName(), user.getPassword());
-            log.info("usuario registrado");
+            log.info("usuario actualizado");
+            return true;
+        } catch (DataAccessException e) {
+            log.info("Error al ejecutar comando" + e);
+            return false;
+        }
+    }
+
+    /**
+     * buscar datos del usuario por su ID
+     *
+     * @param idUser id del usuario a buscar
+     * @return retorna el usuario buscado
+     */
+    public User returnUser(int idUser) {
+        String script = "SELECT * FROM Users WHERE userId = ?";
+        return jdbcTemplate.queryForObject(script, (rs, rowNum) -> {
+            User user = new User();
+            user.setName(rs.getString("name"));
+            user.setLastName(rs.getString("lastname"));
+            user.setEmail(rs.getString("email"));
+            user.setUserName(rs.getString("username"));
+            user.setPassword(rs.getString("password"));
+            return user;
+        }, idUser);
+    }
+
+    public boolean updateUser(User user, int userId) {
+        try {
+            String script = "UPDATE Users SET name = ?, lastName = ?, email = ?, username = ?, password = ? WHERE userId = ?";
+            jdbcTemplate.update(script, user.getName(), user.getLastName(), user.getEmail(), user.getUserName(), user.getPassword(), userId);
+            log.info("Comando ejecutado: Usuario actualizado");
             return true;
         } catch (DataAccessException e) {
             log.info("Error al ejecutar comando" + e);
@@ -58,10 +89,11 @@ public class UserRepository {
             return -1;
         }
     }
-    
+
     /**
      * Buscar si existe en usuario con ese email registrado
-     * @param email email a buscar en el sistema 
+     *
+     * @param email email a buscar en el sistema
      * @return true si existe, false si no existe
      */
     public boolean findEmail(String email) {
@@ -77,9 +109,10 @@ public class UserRepository {
 
         }
     }
-    
-        /**
+
+    /**
      * Buscar si existe en usuario con ese email registrado
+     *
      * @param userName username a buscar en el sistema
      * @return true si existe, false si no existe
      */
@@ -95,5 +128,5 @@ public class UserRepository {
             return false;
         }
     }
-    
+
 }
