@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="styles/styles.css"/>
+        <script src="js/ProfileScript.js" defer></script>
+    </head>
+    <body>
+        <h1><span th:text="${user.userName}"/> Profile</h1>
+        <form id="user-update" action="/update-user" method="POST">            
+            <label>Nombre</label>
+            <input type="text" name="name" th:value="${user.name}" disabled>
+            <label>Apellido</label>
+            <input type="text" name="last_name" th:value="${user.lastName}" disabled>
+            <label>Correo</label>
+            <input type="text" name="email" th:value="${user.email}" disabled>
+            <label>Nombre de usuario</label>
+            <input type="text" name="username" th:value="${user.userName}" disabled>
+            <label>Contraseña</label>
+            <input type="text" name="password" th:value="${user.password}" disabled>
+            <input id="btn-action" type="button" value="Actualizar usuario">
+            <input id="btn-cancel" type="button" value="Cancelar" hidden>
+            <input id="btn-update" type="submit" value="Actualizar" hidden/>
+        </form>
+        <p th:text="${message}"></p>
+        <section>
+            <div class="post-card" th:each="post:${posts}" style="background:#d6d6d6; margin: 1px 0;">
+                <h2 th:text="${post.tittle}"></h2>
+                <p th:text="${post.userName}"></p>
+                <p th:text="${post.createdDate}"></p>
+                <p th:text="${post.content}"></p>
+                <nav>
+                    <a th:href="'delete?id='+${post.postId}">Eliminar</a>
+                    <a th:href="'update?id='+${post.postId}">Editar</a>
+                </nav>
+            </div>
+        </section>
+    </body>
+</html>

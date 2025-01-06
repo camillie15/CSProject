@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
  * Clase controladora de todos las peticiones del usuario
@@ -32,8 +33,6 @@ public class UserController {
      */
     @GetMapping("/register")
     public String registerView(Model model) {
-        String message = "Inserte sus datos para el registro";
-        model.addAttribute("message", message);
         return "register";
     }
 
@@ -46,23 +45,20 @@ public class UserController {
      * correcto
      */
     @PostMapping("/submit-register")
-    public String registerForm(@RequestParam Map<String, String> allParams, Model model) {
+    public String registerForm(@RequestParam Map<String, String> allParams, RedirectAttributes redirect) {
 
         String name = allParams.get("name");
         String lastName = allParams.get("last_name");
         String email = allParams.get("email");
         String userName = allParams.get("username");
         String password = allParams.get("password");
-
         boolean flag = userService.userRegister(name, lastName, email, userName, password);
-
         if (flag) {
             return "redirect:/login";
         } else {
             String message = "Este usuario ya se encuentra registrado";
-            model.addAttribute("message", message);
-            return "register";
+            redirect.addFlashAttribute("message", message);
+            return "redirect:/register";
         }
-
     }
 }
