@@ -50,5 +50,21 @@ public class CommentServiceImpl implements CommentService{
     public List<Comment> reviewExistedCommentsByPost(int postId) {
         return commentRepository.getCommentsByPost(postId);
     }
+
+    @Override
+    public void reviewDataCommentForUpdate(Comment comment) {
+        commentRepository.updateComment(comment);
+    }
+
+    @Override
+    public Comment reviewExistedComment(int commentId) {
+        return commentRepository.getCommentById(commentId);
+    }
+
+    @Override
+    public void reviewCommentForDelete(int commentId) {
+        Comment comment = reviewExistedComment(commentId);
+        commentRepository.deleteComment(comment);
+    }
     
 }

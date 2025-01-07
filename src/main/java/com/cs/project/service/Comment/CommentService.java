@@ -10,5 +10,8 @@ import java.util.List;
  */
 public interface CommentService {
     void reviewDataCommentForAdd(String content, int postId, HttpSession session);
-    public List<Comment> reviewExistedCommentsByPost(int postId);
+    List<Comment> reviewExistedCommentsByPost(int postId);
+    void reviewDataCommentForUpdate(Comment comment);
+    Comment reviewExistedComment(int commentId);
+    void reviewCommentForDelete(int commentId);
 }

@@ -1,4 +1,3 @@
-
 package com.cs.project.repository;
 
 import com.cs.project.model.Comment;
@@ -10,40 +9,78 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 /**
- * Clase que se encarga de la interacción con la tabla Comments de la DB 
+ * Clase que se encarga de la interacción con la tabla Comments de la DB
+ *
  * @author Camillie Ayovi Villafuerte
  */
 @Slf4j
 @Repository
 public class CommentRepository {
+
     @Autowired
     private JdbcTemplate jdbcTemplate;
-    
+
     /**
-     * Método que ejecuta una sentencia SQL para obtener los registros de la tabla Comments según el id del post 
+     * Método que ejecuta una sentencia SQL para obtener los registros de la
+     * tabla Comments según el id del post
+     *
      * @param postId id del post del que se quiere obtener los comentarios
      * @return retorna la lista de comentarios
      */
-    public List<Comment> getCommentsByPost(int postId){
+    public List<Comment> getCommentsByPost(int postId) {
         String query = "SELECT c.*, u.username AS userName FROM Comments c "
                 + "JOIN Users u ON c.userId = u.userId "
                 + "WHERE postId = ?";
         List<Comment> comments = jdbcTemplate.query(query, new CommentRowMapper(), postId);
         return comments != null ? comments : new ArrayList<>();
     }
-    
+
+    public Comment getCommentById(int commentId) {
+
+        String query = "SELECT c.*, u.username AS userName FROM Comments c "
+                + "JOIN Users u ON c.userId = u.userId "
+                + "WHERE commentId = ?";
+        try {
+            return jdbcTemplate.queryForObject(query, new CommentRowMapper(), commentId);
+        } catch (Exception e) {
+            log.error("Error al ejecutar la consulta o al obtener el comentario: ", e);
+            return null;
+        }
+    }
+
     /**
-     * Método que ejecuta una sentencia SQL para insertar un nuevo comentario a la tabla Comments
+     * Método que ejecuta una sentencia SQL para insertar un nuevo comentario a
+     * la tabla Comments
+     *
      * @param comment comentarios a insertar en la tabla
      */
-    public void createComment(Comment comment){
+    public void createComment(Comment comment) {
         String query = "INSERT INTO Comments (content, userId, postId, createdDate) VALUES(?, ?, ?, ?)";
         int rowsAffected = jdbcTemplate.update(query, comment.getContent(), comment.getUserId(), comment.getPostId(), comment.getCreatedDate());
-        if(rowsAffected == 1){
+        if (rowsAffected == 1) {
             log.info("Comentario creado exitosamente");
-        }else{
+        } else {
             log.info("Error en el registro del comentario");
         }
     }
-}
 
+    public void updateComment(Comment comment) {
+        String query = "UPDATE Comments SET content = ? WHERE commentId = ?";
+        int rowsAffected = jdbcTemplate.update(query, comment.getContent(), comment.getCommentId());
+        if (rowsAffected == 1) {
+            log.info("Comentario actualizado exitosamente");
+        } else {
+            log.info("Error en la actualización del comentario");
+        }
+    }
+
+    public void deleteComment(Comment comment) {
+        String query = "DELETE FROM Comments WHERE commentId = ?";
+        int rowsAffected = jdbcTemplate.update(query, comment.getCommentId());
+        if (rowsAffected == 1) {
+            log.info("Comentario eliminado exitosamente");
+        } else {
+            log.info("Error en la eliminación del comentario");
+        }
+    }
+}
