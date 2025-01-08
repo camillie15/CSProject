@@ -30,7 +30,8 @@ public class PostRepository {
     public List<Post> getAllPosts() {
         try {
             String query = "SELECT p.*, u.username AS userName FROM Posts p "
-                    + "JOIN Users u ON p.userId = u.userId";
+                    + "JOIN Users u ON p.userId = u.userId "
+                    + "ORDER BY p.createdDate DESC";
             return jdbcTemplate.query(query, new PostRowMapper());
         } catch (DataBaseEjecuteException e) {
             return new ArrayList<Post>();
