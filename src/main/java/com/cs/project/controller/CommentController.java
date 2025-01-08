@@ -95,13 +95,12 @@ public class CommentController {
      * @return retorna la plantilla de comentarios
      */
     @PostMapping("/comments/{postId}/update/{commentId}")
-    public String update(@PathVariable("postId") int postId, @PathVariable("commentId") int commentId, @RequestParam Map<String, String> parameters) {
+    public String updateComment(@PathVariable("postId") int postId, @PathVariable("commentId") int commentId, @RequestParam Map<String, String> parameters) {
         try {
             Comment comment = commentService.reviewExistedComment(commentId);
             String content = parameters.get("content");
             if (comment != null) {
                 comment.setContent(content);
-                log.info("Contenido actualizado del comentario: " + comment.getContent());
                 commentService.reviewDataCommentForUpdate(comment);
             } else {
                 log.info("Comentario no encontrado con id: " + commentId);
@@ -119,7 +118,7 @@ public class CommentController {
      * @return retorna la plantilla de comentarios
      */
     @PostMapping("/comments/{postId}/delete/{commentId}")
-    public String delete(@PathVariable("postId") int postId, @PathVariable("commentId") int commentId) {
+    public String deleteComment(@PathVariable("postId") int postId, @PathVariable("commentId") int commentId) {
         try {
             commentService.reviewCommentForDelete(commentId);
             log.info("Comentario con id: " + commentId + " eliminado.");

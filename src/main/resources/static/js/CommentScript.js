@@ -9,7 +9,7 @@ formComment.addEventListener("submit", (event) => {
     }
 });
 
-//Método para apertura y cierre de dropdown
+//Función para apertura y cierre de dropdown
 function commentOptions(event) {
     event.stopPropagation();
     const button = event.target;
@@ -23,19 +23,19 @@ function commentOptions(event) {
     });
 
     const dropdown = document.getElementById(`comment-dropdown-${commentId}`);
-    
+
     const commentUserId = button.getAttribute("data-user-id");
     const userLoggedId = document.getElementById("user-id-logged").getAttribute("data-user-logged-id");
-    
-    if (commentUserId !== userLoggedId){
+
+    if (commentUserId !== userLoggedId) {
         dropdown.classList.remove("btn-dropdown");
         dropdown.classList.add("disabled");
-    }else{
+    } else {
         dropdown.classList.toggle('show');
     }
 }
 
-//Método para cierre de dropdown en un clic en cualquier lugar de la ventana
+//Cierre de dropdown en un clic en cualquier lugar de la ventana
 window.onclick = function (event) {
     if (!event.target.matches('.btn-dropdown') && !event.target.closest('.dropdown')) {
         const dropdowns = document.querySelectorAll('.dropdown-content');
@@ -45,21 +45,23 @@ window.onclick = function (event) {
     }
 }
 
-//Método para visualización de formulario para editar comentario
+//Función para visualización de formulario para editar comentario
 function editComment(event) {
     const a = event.target;
     const commentId = a.getAttribute("data-comment-id");
 
-    const form = document.getElementById(`div-form-edit-${commentId}`);
-    form.classList.remove('form-edit');
-    form.classList.toggle('show');
-
-    const allForms = document.querySelectorAll('.form-edit');
+    const allForms = document.querySelectorAll('.show');
     allForms.forEach(form => {
-        if (form.id !== `div-form-edit-${commentId}`) {
-            form.classList.remove('show');
-        }
-    }); 
+        form.classList.remove('show');
+        form.classList.add('form-edit');
+    });
+    
+    const formEdit = document.getElementById(`div-form-edit-${commentId}`);
+    if (formEdit) {
+        formEdit.classList.remove('form-edit');
+        formEdit.classList.add('show');
+    }
+
 }
 
 //Validación de datos ingresados

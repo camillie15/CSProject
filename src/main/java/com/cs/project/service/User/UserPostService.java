@@ -8,6 +8,10 @@ import com.cs.project.model.Post;
 import jakarta.servlet.http.HttpSession;
 import java.util.List;
 
-public interface UserPost {
+/**
+ * Interfaz que permite al recuperar todos los Post hecho por un usuario
+ * @author nan2p
+ */
+public interface UserPostService {
     List<Post> getPostsByUser(HttpSession session);
 }
