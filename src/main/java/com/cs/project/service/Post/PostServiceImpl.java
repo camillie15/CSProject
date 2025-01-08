@@ -62,6 +62,17 @@ public class PostServiceImpl implements PostService{
             return null;
         }
     }
+
+    @Override
+    public void reviewDataPostForUpdate(Post post) {
+        postRepository.updatePost(post);
+    }
+
+    @Override
+    public void reviewPostForDelete(int postId) {
+        Post post = reviewExistentPost(postId);
+        postRepository.deletePost(post);
+    }
     
     
 }

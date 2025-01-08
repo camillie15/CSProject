@@ -11,5 +11,8 @@ import java.util.List;
 public interface PostService {
     List<Post> reviewExistentPosts();
     void reviewDataPostForCreate(String tittle, String content, HttpSession session);
-    Post reviewExistentPost(int idPost);
+    Post reviewExistentPost(int postId);
+    void reviewDataPostForUpdate(Post post);
+    void reviewPostForDelete(int postId);
+
 }
