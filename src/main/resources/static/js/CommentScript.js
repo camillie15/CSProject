@@ -62,16 +62,32 @@ function editComment(event) {
     }); 
 }
 
-//Método para cancelar y cerrar formulario de editar comentario
-function cancelEdit(event){
+//Validación de datos ingresados
+const allEditForms = document.querySelectorAll('.form-edit-comment');
+
+allEditForms.forEach(form => {
+    form.addEventListener('submit', (event) => {
+        const content = form.elements['content'].value.trim();
+        if (content === "") {
+            event.preventDefault();
+            alert("El comentario no debe estar vacío ni contener solo espacios en blanco.");
+        }
+    });
+});
+
+//Función para cancelar y cerrar formulario de editar comentario
+function cancelEdit(event) {
     const btnCancelar = event.target;
 
     const commentId = btnCancelar.getAttribute("data-comment-id");
-
     const form = document.getElementById(`div-form-edit-${commentId}`);
+    
+    const inputContent = form.querySelector('input[name="content"]');
 
     if (form) {
         form.classList.remove('show');
         form.classList.add('form-edit');
+
+        inputContent.value = inputContent.defaultValue;
     }
 }

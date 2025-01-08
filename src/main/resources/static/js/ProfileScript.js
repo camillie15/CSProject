@@ -30,7 +30,7 @@ formUpdate.addEventListener('submit', (e) => {
     const username = formUpdate.elements['username'].value.trim();
     const email = formUpdate.elements['email'].value.trim();
     const password = formUpdate.elements['password'].value.trim();
-    
+
     if (testNull(name, last_name, username, email, password)) {
         e.preventDefault(); // Detiene el envío del formulario
         console.log("Empty fields");
@@ -44,17 +44,20 @@ formUpdate.addEventListener('submit', (e) => {
 function testNull(...fields) {
     return fields.some(field => field === "");
 }
-//Validación datos ingresados
-const formComment = document.getElementById("form-add-comment");
+//Validación datos ingresados en el editar post
+const allEditForms = document.querySelectorAll('.form-edit');
 
-formComment.addEventListener("submit", (event) => {
-    const title = document.getElementById("title").value.trim();
-    const content = document.getElementById("content").value.trim();
-    if (content === "" || title === "") {
-        event.preventDefault();
-        alert("El post no debe estar vacio ni contener solo espacios en blanco.");
-    }
+allEditForms.forEach(form => {
+    form.addEventListener('submit', (event) => {
+        const title = form.elements['title'].value.trim();
+        const content = form.elements['content'].value.trim();
+        if (title === "" || content === "") {
+            event.preventDefault();
+            alert("El post no debe estar vacío ni contener solo espacios en blanco.");
+        }
+    });
 });
+
 //Función para visualización de formulario para editar comentario
 function editPost(event) {
     const a = event.target;
@@ -65,7 +68,7 @@ function editPost(event) {
         form.classList.remove('show');
         form.classList.add('form-edit');
     });
-    
+
     const formEdit = document.getElementById(`form-edit-${postId}`);
     if (formEdit) {
         formEdit.classList.remove('form-edit');
@@ -80,9 +83,13 @@ function cancelEdit(event) {
     const postId = btnCancelar.getAttribute("data-post-id");
 
     const form = document.getElementById(`form-edit-${postId}`);
-
+    const inputTitle = form.querySelector('input[name="title"]');
+    const inputContent = form.querySelector('input[name="content"]');
+    
     if (form) {
         form.classList.remove('show');
         form.classList.add('form-edit');
+        inputTitle.value = inputTitle.defaultValue;
+        inputContent.value = inputContent.defaultValue;
     }
 }
