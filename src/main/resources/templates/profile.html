@@ -6,6 +6,20 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="styles/styles.css"/>
         <script src="js/ProfileScript.js" defer></script>
+        <style>
+            .show {
+                display: block;
+            }
+            .form-edit {
+                display: none;
+            }
+            .btn-delete{
+                border: none;
+                padding: 0;
+                font-size: 1rem;
+                background-color: transparent;
+            }
+        </style>
     </head>
     <body>
         <h1><span th:text="${user.userName}"/> Profile</h1>
@@ -32,9 +46,21 @@
                 <p th:text="${post.createdDate}"></p>
                 <p th:text="${post.content}"></p>
                 <nav>
-                    <a th:href="'delete?id='+${post.postId}">Eliminar</a>
-                    <a th:href="'update?id='+${post.postId}">Editar</a>
+                    <form th:action="@{/post/delete/{postId}(postId=${post.postId})}" method="POST">
+                        <button class='btn-delete' type="submit" id="delete-${post.cpostId}">Eliminar</button>
+                    </form> 
+                    <a onclick="editPost(event)" id="edit-${post.postId}" th:data-post-id="${post.postId}">Editar</a>
                 </nav>
+                <div>
+                    <form method="POST" th:action="@{/post/update/{postId}(postId=${post.postId})}" class="form-edit" th:id="'form-edit-' + ${post.postId}">
+                        <label>Titulo</label>
+                        <input type="text" th:value="${post.tittle}" name="title">
+                        <label>Contenido</label>
+                        <input type="text" th:value="${post.content}" name="content">
+                        <button type="submit">Actualizar</button>
+                        <button type="button" id="btn-cancelar" th:data-post-id="${post.postId}" onclick="cancelEdit(event)">Cancelar</button>
+                    </form>
+                </div>
             </div>
         </section>
     </body>

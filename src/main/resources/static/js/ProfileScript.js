@@ -44,3 +44,45 @@ formUpdate.addEventListener('submit', (e) => {
 function testNull(...fields) {
     return fields.some(field => field === "");
 }
+//Validación datos ingresados
+const formComment = document.getElementById("form-add-comment");
+
+formComment.addEventListener("submit", (event) => {
+    const title = document.getElementById("title").value.trim();
+    const content = document.getElementById("content").value.trim();
+    if (content === "" || title === "") {
+        event.preventDefault();
+        alert("El post no debe estar vacio ni contener solo espacios en blanco.");
+    }
+});
+//Función para visualización de formulario para editar comentario
+function editPost(event) {
+    const a = event.target;
+    const postId = a.getAttribute("data-post-id");
+
+    const allForms = document.querySelectorAll('.show');
+    allForms.forEach(form => {
+        form.classList.remove('show');
+        form.classList.add('form-edit');
+    });
+    
+    const formEdit = document.getElementById(`form-edit-${postId}`);
+    if (formEdit) {
+        formEdit.classList.remove('form-edit');
+        formEdit.classList.add('show');
+    }
+}
+
+//Función para cancelar y cerrar formulario de editar comentario
+function cancelEdit(event) {
+    const btnCancelar = event.target;
+
+    const postId = btnCancelar.getAttribute("data-post-id");
+
+    const form = document.getElementById(`form-edit-${postId}`);
+
+    if (form) {
+        form.classList.remove('show');
+        form.classList.add('form-edit');
+    }
+}
