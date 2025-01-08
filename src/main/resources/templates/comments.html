@@ -74,11 +74,10 @@
                                 ...
                             </button>
                             <div th:id="'comment-dropdown-' + ${comment.commentId}" class="dropdown-content">
-                                <a onclick="editComment(event)" id="edit-${comment.commentId}" th:data-comment-id="${comment.commentId}" class="enabled">Editar</a>
+                                <a onclick="editComment(event)" id="edit-${comment.commentId}" th:data-comment-id="${comment.commentId}">Editar</a>
 
                                 <form th:action="@{'/comments/' + ${post.postId} + '/delete/' + ${comment.commentId}}" method="POST">
-                                    <input type="hidden" name="_method" value="DELETE">
-                                    <button type="submit" id="delete-${comment.commentId}" class="enabled">Eliminar</button>
+                                    <button type="submit" id="delete-${comment.commentId}">Eliminar</button>
                                 </form>                            
                             </div>
                         </div>
@@ -91,7 +90,7 @@
                             <input type="hidden" id="user-id-logged" th:data-user-logged-id="${userIdLogged}">
                             <input type="text" th:value="${comment.content}" name="content">
                             <button type="submit">Actualizar</button>
-                            <button type="button" class="btn-cancelar" th:data-comment-id="${comment.commentId}" onclick="cancelEdit(event)">Cancelar</button>
+                            <button type="button" id="btn-cancelar" th:data-comment-id="${comment.commentId}" onclick="cancelEdit(event)">Cancelar</button>
                         </form>
                     </div>
 
