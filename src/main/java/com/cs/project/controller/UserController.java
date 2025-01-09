@@ -1,6 +1,7 @@
 package com.cs.project.controller;
 
 import com.cs.project.service.User.UserServiceImpl;
+import jakarta.servlet.http.HttpSession;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,8 +33,12 @@ public class UserController {
      * @return retorna la vista principal del usuario
      */
     @GetMapping("/register")
-    public String registerView(Model model) {
-        return "register";
+    public String registerView(Model model, HttpSession session) {
+        if (session.getAttribute("userIdLogged") == null) {
+            return "register";
+        } else {
+            return "redirect:/";
+        }
     }
 
     /**

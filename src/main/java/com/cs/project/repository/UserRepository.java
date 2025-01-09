@@ -48,15 +48,20 @@ public class UserRepository {
      */
     public User returnUser(int idUser) {
         String script = "SELECT * FROM Users WHERE userId = ?";
-        return jdbcTemplate.queryForObject(script, (rs, rowNum) -> {
-            User user = new User();
-            user.setName(rs.getString("name"));
-            user.setLastName(rs.getString("lastname"));
-            user.setEmail(rs.getString("email"));
-            user.setUserName(rs.getString("username"));
-            user.setPassword(rs.getString("password"));
-            return user;
-        }, idUser);
+        try {
+            return jdbcTemplate.queryForObject(script, (rs, rowNum) -> {
+                User user = new User();
+                user.setName(rs.getString("name"));
+                user.setLastName(rs.getString("lastname"));
+                user.setEmail(rs.getString("email"));
+                user.setUserName(rs.getString("username"));
+                user.setPassword(rs.getString("password"));
+                return user;
+            }, idUser);
+        } catch (DataAccessException e) {
+            return null;
+        }
+
     }
 
     public boolean updateUser(User user, int userId) {
