@@ -31,6 +31,7 @@ function commentOptions(event) {
         dropdown.classList.remove("btn-dropdown");
         dropdown.classList.add("disabled");
     } else {
+        dropdown.classList.remove("form-edit");
         dropdown.classList.toggle('show');
     }
 }
@@ -83,13 +84,11 @@ function cancelEdit(event) {
 
     const commentId = btnCancelar.getAttribute("data-comment-id");
     const form = document.getElementById(`div-form-edit-${commentId}`);
-    
     const inputContent = form.querySelector('input[name="content"]');
 
     if (form) {
         form.classList.remove('show');
         form.classList.add('form-edit');
-
         inputContent.value = inputContent.defaultValue;
     }
 }

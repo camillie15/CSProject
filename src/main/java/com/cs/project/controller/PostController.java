@@ -33,10 +33,10 @@ public class PostController {
      * Método para la visualización del formulario para la creación del post
      *
      * @param model pasa el formulario a la vista
-     * @return retorna la plantilla de crear post
+     * @return retorna la plantilla del formulario crear post
      */
     @GetMapping("/createPost")
-    public String createPostForm(Model model) {
+    public String viewPostForm(Model model) {
         Post post = new Post();
         model.addAttribute("post", post);
         return "createPost";
@@ -47,42 +47,50 @@ public class PostController {
      *
      * @param parameters parámetros de la solicitud
      * @param session sesión activada por el usuario
-     * @return retorna la plantilla de crear post
+     * @return retorna la plantilla de home
      */
     @PostMapping("/createPost")
     public String createPost(@RequestParam Map<String, String> parameters, HttpSession session) {
         String tittle = parameters.get("tittle");
         String content = parameters.get("content");
         postService.reviewDataPostForCreate(tittle, content, session);
+        log.info("PostController / Post creado");
         return "redirect:/home";
     }
 
+    /**
+     * Método que toma los datos de la solicitud POST para actualizar el post
+     *
+     * @param postId identificador del post a actualizar
+     * @param parameters parámetros de la solicitud
+     * @return retorna la plantilla de perfil del usuario
+     */
     @PostMapping("/post/update/{postId}")
     public String updatePost(@PathVariable("postId") int postId, @RequestParam Map<String, String> parameters) {
-        try {
-            Post post = postService.reviewExistentPost(postId);
-            String tittle = parameters.get("title");
-            String content = parameters.get("content");
-            if (post != null) {
-                post.setTittle(tittle);
-                post.setContent(content);
-                postService.reviewDataPostForUpdate(post);
-            } else {
-                log.info("Posr no encontrado con id: " + postId);
-            }
-        } catch (Exception e) {
-            log.error("Error: " + e);
+        Post post = postService.reviewExistentPost(postId);
+        String tittle = parameters.get("title");
+        String content = parameters.get("content");
+        if (post != null) {
+            post.setTittle(tittle);
+            post.setContent(content);
+            postService.reviewDataPostForUpdate(post);
+            log.info("PostController / Post con id: " + postId + " actualizado");
+        } else {
+            log.warn("PostController / Post no encontrado con id: " + postId);
         }
         return "redirect:/profile";
     }
-    
+
+    /**
+     * Método que toma los datos de la solicitud POST para eliminar un post
+     *
+     * @param postId identificador del post a eliminar
+     * @return retorna la plantilla de perfil del usuario
+     */
     @PostMapping("/post/delete/{postId}")
-    public String deletePost(@PathVariable("postId") int postId){
-        try {
-            postService.reviewPostForDelete(postId);
-        } catch (Exception e) {
-            log.error("Error: " + e);
-        }
+    public String deletePost(@PathVariable("postId") int postId) {
+        postService.reviewPostForDelete(postId);
+        log.info("PostController / Post con id: " + postId + " eliminado");
         return "redirect:/profile";
     }
 }
