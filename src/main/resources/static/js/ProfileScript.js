@@ -44,6 +44,7 @@ formUpdate.addEventListener('submit', (e) => {
 function testNull(...fields) {
     return fields.some(field => field === "");
 }
+
 //Validación datos ingresados en el editar post
 const allEditForms = document.querySelectorAll('.form-edit');
 

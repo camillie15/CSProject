@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -21,66 +22,86 @@ public class CommentRepository {
     private JdbcTemplate jdbcTemplate;
 
     /**
-     * Método que ejecuta una sentencia SQL para obtener los registros de la
-     * tabla Comments según el id del post
+     * Método que ejecuta una sentencia SQL para obtener los registros de la tabla Comments según el id del post
      *
      * @param postId id del post del que se quiere obtener los comentarios
      * @return retorna la lista de comentarios
      */
     public List<Comment> getCommentsByPost(int postId) {
-        String query = "SELECT c.*, u.username AS userName FROM Comments c "
-                + "JOIN Users u ON c.userId = u.userId "
-                + "WHERE postId = ?";
-        List<Comment> comments = jdbcTemplate.query(query, new CommentRowMapper(), postId);
-        return comments != null ? comments : new ArrayList<>();
+        try {
+            String query = "SELECT c.*, u.username AS userName FROM Comments c "
+                    + "JOIN Users u ON c.userId = u.userId "
+                    + "WHERE postId = ?";
+            return jdbcTemplate.query(query, new CommentRowMapper(), postId);
+        } catch (DataAccessException e) {
+            log.error("SQL query / Error: " + e);
+            return new ArrayList<Comment>();
+        }
     }
 
+    /**
+     * Método que ejecuta una sentencia SQL para obtener un comentario según el id
+     *
+     * @param commentId identificador del comentario a buscar
+     * @return retorna el comentario encontrado o null
+     */
     public Comment getCommentById(int commentId) {
-
-        String query = "SELECT c.*, u.username AS userName FROM Comments c "
-                + "JOIN Users u ON c.userId = u.userId "
-                + "WHERE commentId = ?";
         try {
+            String query = "SELECT c.*, u.username AS userName FROM Comments c "
+                    + "JOIN Users u ON c.userId = u.userId "
+                    + "WHERE commentId = ?";
             return jdbcTemplate.queryForObject(query, new CommentRowMapper(), commentId);
-        } catch (Exception e) {
-            log.error("Error al ejecutar la consulta o al obtener el comentario: ", e);
+        } catch (DataAccessException e) {
+            log.error("SQL query / Error con ID de comentario: " + commentId, e);
             return null;
         }
     }
 
     /**
-     * Método que ejecuta una sentencia SQL para insertar un nuevo comentario a
-     * la tabla Comments
+     * Método que ejecuta una sentencia SQL para insertar un comentario a la tabla Comments
      *
-     * @param comment comentarios a insertar en la tabla
+     * @param comment comentario a insertar en la tabla
      */
     public void createComment(Comment comment) {
-        String query = "INSERT INTO Comments (content, userId, postId, createdDate) VALUES(?, ?, ?, ?)";
-        int rowsAffected = jdbcTemplate.update(query, comment.getContent(), comment.getUserId(), comment.getPostId(), comment.getCreatedDate());
-        if (rowsAffected == 1) {
-            log.info("Comentario creado exitosamente");
-        } else {
-            log.info("Error en el registro del comentario");
+        try {
+            String query = "INSERT INTO Comments (content, userId, postId, createdDate) VALUES(?, ?, ?, ?)";
+            jdbcTemplate.update(query, comment.getContent(), comment.getUserId(), comment.getPostId(), comment.getCreatedDate());
+            log.info("SQL query / Comentario creado exitosamente");
+        } catch (DataAccessException e) {
+            log.error("SQL query / Error al insertar el comentario con ID : " + comment.getCommentId(), e);
+
         }
     }
 
+    /**
+     * Método que ejecuta una sentencia SQL para actualizar un comentario
+     *
+     * @param comment comentario a actualizar
+     */
     public void updateComment(Comment comment) {
-        String query = "UPDATE Comments SET content = ? WHERE commentId = ?";
-        int rowsAffected = jdbcTemplate.update(query, comment.getContent(), comment.getCommentId());
-        if (rowsAffected == 1) {
-            log.info("Comentario actualizado exitosamente");
-        } else {
-            log.info("Error en la actualización del comentario");
+        try {
+            String query = "UPDATE Comments SET content = ? WHERE commentId = ?";
+            jdbcTemplate.update(query, comment.getContent(), comment.getCommentId());
+            log.info("SQL query / Comentario actualizado exitosamente");
+        } catch (DataAccessException e) {
+            log.error("SQL query / Error al actualizar el commentario con ID " + comment.getCommentId(), e);
+
         }
     }
 
+    /**
+     * Método que ejecuta una sentencia SQL para eliminar un comentario
+     *
+     * @param comment comentario a eliminar
+     */
     public void deleteComment(Comment comment) {
-        String query = "DELETE FROM Comments WHERE commentId = ?";
-        int rowsAffected = jdbcTemplate.update(query, comment.getCommentId());
-        if (rowsAffected == 1) {
-            log.info("Comentario eliminado exitosamente");
-        } else {
-            log.info("Error en la eliminación del comentario");
+        try {
+            String query = "DELETE FROM Comments WHERE commentId = ?";
+            jdbcTemplate.update(query, comment.getCommentId());
+            log.info("SQL query / Comentario eliminado exitosamente");
+        } catch (DataAccessException e) {
+            log.error("SQL query / Error al eliminar el commentario con ID " + comment.getCommentId(), e);
+
         }
     }
 }

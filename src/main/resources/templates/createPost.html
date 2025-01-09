@@ -4,10 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Post</title>
+    <link rel="stylesheet" href="styles/styles.css"/>
     <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.6.0/uicons-regular-straight/css/uicons-regular-straight.css'>
     <script src="js/CreatePostScript.js" defer=""></script>
 </head>
 <body>
+    <div th:replace="_fragments::header"></div>
     <main>
         <h2>Create a new post</h2>
         <form id="form-create-post" th:action="@{/createPost}" th:object="${post}" method="POST">
@@ -20,5 +22,7 @@
             <button type="submit">Create Post</button>
         </form>
     </main>
+    <div th:replace="_fragments::footer"></div>
+
 </body>
 </html>

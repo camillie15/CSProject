@@ -10,20 +10,22 @@ import org.springframework.stereotype.Service;
 
 /**
  * Clase que implementa la interfaz PostService
+ *
  * @author Camillie Ayovi Villafuerte
  */
 @Service
-public class PostServiceImpl implements PostService{
+public class PostServiceImpl implements PostService {
 
     private final PostRepository postRepository;
-    
+
     @Autowired
     public PostServiceImpl(PostRepository postRepository) {
         this.postRepository = postRepository;
     }
 
     /**
-     * Método que obtiene la lista de Posts
+     * Método que obtiene la lista de Posts de la capa de datos
+     *
      * @return retorna lista de los registros de la tabla Posts
      */
     @Override
@@ -32,9 +34,10 @@ public class PostServiceImpl implements PostService{
     }
 
     /**
-     * Método que asigna los valores a los atributos del objeto Post
+     * Método que asigna los valores a los atributos del objeto Post para su registro en la capa de datos
+     *
      * @param tittle título del post
-     * @param content contenido del post 
+     * @param content contenido del post
      * @param session sesión activada por el usuario
      */
     @Override
@@ -49,30 +52,40 @@ public class PostServiceImpl implements PostService{
     }
 
     /**
-     * Método que valida la existencia de un post según su id
-     * @param idPost id del post a buscar
+     * Método que valida la existencia de un post según su identificador
+     *
+     * @param idPost identificador del post a buscar
      * @return retorna el post con el id enviado
      */
     @Override
     public Post reviewExistentPost(int idPost) {
         Post post = postRepository.getPostById(idPost);
-        if(post != null){
+        if (post != null) {
             return post;
-        }else{
+        } else {
             return null;
         }
     }
 
+    /**
+     * Método que recibe el objeto post para su actualización en la capa de datos
+     *
+     * @param post post a actualizar
+     */
     @Override
     public void reviewDataPostForUpdate(Post post) {
         postRepository.updatePost(post);
     }
 
+    /**
+     * Método que recibe el identificador del objeto post para su eliminación en la capa de datos
+     *
+     * @param postId identificador del post a eliminar
+     */
     @Override
     public void reviewPostForDelete(int postId) {
         Post post = reviewExistentPost(postId);
         postRepository.deletePost(post);
     }
-    
-    
+
 }
