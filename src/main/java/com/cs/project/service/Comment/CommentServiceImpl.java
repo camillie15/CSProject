@@ -25,9 +25,10 @@ public class CommentServiceImpl implements CommentService{
     }
     
     /**
-     * Método que asigna los valores a los atributos del objeto Comment
+     * Método que asigna los valores a los atributos del objeto Comment para su registro en la capa de datos
+     * 
      * @param content contenido del comentario
-     * @param postId id del post al que pertenece el comentario
+     * @param postId identificador del post al que pertenece el comentario
      * @param session sesión activada por el usuario
      */
     @Override
@@ -42,8 +43,9 @@ public class CommentServiceImpl implements CommentService{
     }
 
     /**
-     * Método que obtiene la lista de los comentarios por post
-     * @param postId id del post al que pertenecen los comentarios
+     * Método que obtiene la lista de los comentarios por post de la capa de datos
+     * 
+     * @param postId identificador del post al que pertenecen los comentarios
      * @return 
      */
     @Override
@@ -51,16 +53,32 @@ public class CommentServiceImpl implements CommentService{
         return commentRepository.getCommentsByPost(postId);
     }
 
+    /**
+     * Método que recibe el objeto comment para su actualización en la capa de datos
+     * 
+     * @param comment comentario a actualizar
+     */
     @Override
     public void reviewDataCommentForUpdate(Comment comment) {
         commentRepository.updateComment(comment);
     }
 
+    /**
+     * Método que valida la existencia de un comentario según su identificador
+     * 
+     * @param commentId identificador del comentario a buscar
+     * @return retorna el comentario con el identificador enviado
+     */
     @Override
     public Comment reviewExistedComment(int commentId) {
         return commentRepository.getCommentById(commentId);
     }
 
+    /**
+     * Método que recibe el identificador del objeto comment para su eliminación en la capa de datos
+     * 
+     * @param commentId identificador del comentario a eliminar
+     */
     @Override
     public void reviewCommentForDelete(int commentId) {
         Comment comment = reviewExistedComment(commentId);
