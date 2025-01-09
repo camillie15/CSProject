@@ -31,7 +31,7 @@ public class HomeController {
      * @param model pasa la lista a la vista
      * @return retorna la plantilla home
      */
-    @GetMapping("/home")
+    @GetMapping({"/home" , "/"})
     public String home(Model model) {
         List<Post> posts = postService.reviewExistentPosts();
         model.addAttribute("posts", posts);
