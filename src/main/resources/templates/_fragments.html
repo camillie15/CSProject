@@ -6,18 +6,23 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
+        
 
         <header th:fragment="header">
             <h1>VoxPopulity</h1>
             <nav>
-                <a href="/home">Inicio</a>               
+                <a href="/createPost">Crear Post</a> 
+                <div class="separator"></div>
+                <a href="/home">Inicio</a>           
+                <div class="separator"></div>
                 <a href="/profile">Mi perfil</a>
-                <a href="/logout">Cerrar Sesión</a>
+                <div class="separator"></div>
+                <a class="logout" href="/logout"><i class="bi bi-box-arrow-right"></i> </a>
             </nav>
         </header>
 
         <footer th:fragment="footer">
-            <h2>VoxPopulity - Derechos Reservados - 2025</h2>
+            <p>VoxPopulity Derechos Reservados 2025</p>
         </footer>
     </body>
 </html>
