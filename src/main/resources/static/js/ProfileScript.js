@@ -6,7 +6,10 @@ const btnCancel = document.getElementById("btn-cancel");
 
 btnAction.addEventListener("click", () => {
     console.log("change");
-    inputsConfig.forEach(x => x.removeAttribute("disabled"));
+    inputsConfig.forEach(x => {
+        x.removeAttribute("disabled");
+        x.classList.remove("disabled");
+    });
     btnAction.setAttribute("hidden", true);
     btnUpdate.removeAttribute("hidden");
     btnCancel.removeAttribute("hidden")
@@ -14,7 +17,10 @@ btnAction.addEventListener("click", () => {
 
 
 btnCancel.addEventListener("click", () => {
-    inputsConfig.forEach(x => x.setAttribute("disabled", true));
+    inputsConfig.forEach(x => {
+        x.setAttribute("disabled", true);
+        x.classList.add("disabled");
+    });
     btnAction.removeAttribute("hidden");
     btnUpdate.setAttribute("hidden", true);
     btnCancel.setAttribute("hidden", true)
@@ -86,7 +92,7 @@ function cancelEdit(event) {
     const form = document.getElementById(`form-edit-${postId}`);
     const inputTitle = form.querySelector('input[name="title"]');
     const inputContent = form.querySelector('input[name="content"]');
-    
+
     if (form) {
         form.classList.remove('show');
         form.classList.add('form-edit');

@@ -14,10 +14,10 @@ body {
     color: #f4f6fA;
 }
 
-main{
+.info-section{
     flex-direction: column;
     display:flex;
-    align-items: start;
+    align-items: center;
 }
 
 h2, p, a{
@@ -60,3 +60,16 @@ h1{
 h2{
     margin-bottom: 35px;
 }
+
+.main-class{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    place-items: center;
+    gap: 25px;
+    
+    & section{
+        height: 100%;
+    }
+}
+
