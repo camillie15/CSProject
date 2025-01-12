@@ -3,7 +3,7 @@
     Author     : Camillie Ayovi Villafuerte
 */
 
-#section-create-post{
+#section-create-post, #section-update-post{
     display: flex;
     box-sizing: border-box;
     width: 70%;
@@ -21,18 +21,19 @@
         border-radius: 5px;
         padding: 10px 20px;
         color: #f4f6fA;
-    } 
+        overflow-y: auto;
+    }
 }
 
-#form-create-post {
+#form-create-post, #form-update-post {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    
+
     & input[type='text']{
         width: 40%;
     }
-    
+
     & button{
         width: fit-content;
         align-self: center;
@@ -43,10 +44,32 @@
         border: 2px solid #a8b9f9;
         box-shadow: 0 0 3px 0 #a8b9f9;
         transition: all 0.3s ease;
-        
+
         &:hover{
             background-color: #a8b9f9;
             color: #232829;
         }
     }
+}
+#content {
+    overflow-y: auto; /* Asegura que haya scroll si el contenido excede */
+}
+
+#content::-webkit-scrollbar {
+    width: 5px; /* Ancho de la barra de desplazamiento */
+}
+
+#content::-webkit-scrollbar-thumb {
+    background-color: #a8b9f9; /* Color del pulgar (el bloque que se mueve) */
+    border-radius: 10px;
+}
+
+#content::-webkit-scrollbar-thumb:hover {
+    background-color: #232829;
+    cursor: default;/* Color del pulgar cuando el mouse pasa sobre él */
+}
+
+#content::-webkit-scrollbar-track {
+    background: #393f40; /* Color de la vía (el área por donde se mueve el pulgar) */
+    border-radius: 10px;
 }

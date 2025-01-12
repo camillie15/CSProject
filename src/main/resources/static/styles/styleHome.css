@@ -22,18 +22,32 @@
     padding: 20px;
     margin: 20px 0;
 
+    & h2{
+        color: #88ccff;
+    }
     & h2, h3{
         margin: 0;
     }
 }
 
 .div-title-date{
+    width: 100%;
     display: flex;
     flex-direction: row;
     align-items: center;
     gap: 10px;
+    overflow: hidden;
+    & h2{
+        flex: 1;
+        overflow: hidden;
+        word-wrap: break-word;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 1;
+    }
 }
 .div-post-data{
+    width: 100%;
     box-sizing: border-box;
     display: grid;
     grid-template-rows: auto auto auto;
