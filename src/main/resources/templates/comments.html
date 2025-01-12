@@ -4,108 +4,69 @@
         <title>Comentarios</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="styles/styles.css"/>
+        <link rel="stylesheet" href="/styles/styleComments.css"/>
+        <link rel="stylesheet" href="/styles/styles.css"/>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
         <script src="/js/CommentScript.js" defer=""></script>
-        <style>
-            .btn-dropdown {
-                border: none;
-                cursor: pointer;
-                pointer-events: auto;
-            }
-            .dropdown {
-                position: relative;
-                display: inline-block;
-            }
-            .dropdown-content {
-                display: none;
-                position: absolute;
-            }
-            .dropdown-content a {
-                text-decoration: none;
-                display: block;
-                background: #d6d6d6;
-                font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-                font-size: 1rem;
-            }
-            .dropdown-content button {
-                border: none;
-                padding: 0;
-                font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-                font-size: 1rem;
-                
-            }
-            .show {
-                display: block;
-            }
-            .disabled {
-                pointer-events: none;
-                opacity: 0.5;
-            }
-            .form-edit {
-                display: none;
-            }
-            .enabled{
-                cursor: pointer;
-                pointer-events: auto;
-            }
-        </style>
-
     </head>
     <body>
         <div th:replace="_fragments::header"></div>
         <main>
-            <div>
-                <h2 th:text="${post.userName}"></h2>
-                <p th:text="${#temporals.format(post.createdDate, 'dd-MM-yyyy')}"></p>
-                <h4 th:text="${post.tittle}"></h4>
+            <section id="section-post">
+                <div class="div-title-date">
+                    <h2 th:text="${post.tittle}"></h2>
+                    <p class="p-date" th:text="${#temporals.format(post.createdDate, 'dd-MM-yyyy | HH:mm')}"></p>
+                </div>
+                <h3 th:text="${post.userName}"></h3>
                 <p th:text="${post.content}"></p>
-            </div>
-            <div th:if="${comments.isEmpty()}">
-                <p>No hay comentarios aún.</p>
-            </div>
-            <div>
-                <div th:each="comment : ${comments}">
-                    <div>
-                        <div class="dropdown">
-                            <button onclick="commentOptions(event)" th:id="'button-dropdown-' + ${comment.commentId}" class="btn-dropdown" 
-                                    th:data-comment-id="${comment.commentId}" th:data-user-id="${comment.userId}">
-                                ...
-                            </button>
-                            <div th:id="'comment-dropdown-' + ${comment.commentId}" class="dropdown-content">
-                                <a onclick="editComment(event)" id="edit-${comment.commentId}" th:data-comment-id="${comment.commentId}">Editar</a>
+            </section>
+            <section id="section-comments">
+                <div th:if="${comments.isEmpty()}">
+                    <p>No hay comentarios aún.</p>
+                </div>
+                <div>
+                    <div th:each="comment : ${comments}">
+                        <div>
+                            <div class="dropdown">
+                                <button onclick="commentOptions(event)" th:id="'button-dropdown-' + ${comment.commentId}" class="btn-dropdown" 
+                                        th:data-comment-id="${comment.commentId}" th:data-user-id="${comment.userId}">
+                                    ...
+                                </button>
+                                <div th:id="'comment-dropdown-' + ${comment.commentId}" class="dropdown-content">
+                                    <a onclick="editComment(event)" id="edit-${comment.commentId}" th:data-comment-id="${comment.commentId}">Editar</a>
 
-                                <form th:action="@{'/comments/' + ${post.postId} + '/delete/' + ${comment.commentId}}" method="POST">
-                                    <button type="submit" id="delete-${comment.commentId}">Eliminar</button>
-                                </form>                            
+                                    <form th:action="@{'/comments/' + ${post.postId} + '/delete/' + ${comment.commentId}}" method="POST">
+                                        <button type="submit" id="delete-${comment.commentId}">Eliminar</button>
+                                    </form>                            
+                                </div>
                             </div>
+                            <p><strong></strong> <span th:text="${comment.userName}"></span></p>
+                            <p th:text="${#temporals.format(comment.createdDate, 'dd-MM-yyyy | HH:mm')}"></p>
+                            <p th:text="${comment.content}"></p>
                         </div>
-                        <p><strong></strong> <span th:text="${comment.userName}"></span></p>
-                        <p th:text="${#temporals.format(comment.createdDate, 'dd-MM-yyyy | HH:mm')}"></p>
-                        <p th:text="${comment.content}"></p>
-                    </div>
-                    <div class="form-edit" th:id="'div-form-edit-' + ${comment.commentId}">
-                        <form method="POST" th:action="@{/comments/{postId}/update/{commentId}(postId=${post.postId}, commentId=${comment.commentId})}" class="form-edit-comment">
-                            <input type="hidden" id="user-id-logged" th:data-user-logged-id="${userIdLogged}">
-                            <input type="text" th:value="${comment.content}" name="content">
-                            <button type="submit">Actualizar</button>
-                            <button type="button" id="btn-cancelar" th:data-comment-id="${comment.commentId}" onclick="cancelEdit(event)">Cancelar</button>
-                        </form>
+                        <div class="form-edit" th:id="'div-form-edit-' + ${comment.commentId}">
+                            <form method="POST" th:action="@{/comments/{postId}/update/{commentId}(postId=${post.postId}, commentId=${comment.commentId})}" class="form-edit-comment">
+                                <input type="hidden" id="user-id-logged" th:data-user-logged-id="${userIdLogged}">
+                                <input type="text" th:value="${comment.content}" name="content">
+                                <button type="submit">Actualizar</button>
+                                <button type="button" id="btn-cancelar" th:data-comment-id="${comment.commentId}" onclick="cancelEdit(event)">Cancelar</button>
+                            </form>
+                        </div>
+
                     </div>
 
                 </div>
+                </div>
+                <div>
+                    <form id="form-add-comment" th:action="@{/comments/{id}(id=${post.postId})}" th:object="${commentAdd}" method="POST">
+                        <i class="bi bi-person-circle"></i>
+                        <input id="content" type="text" placeholder="Escribe un comentario" th:field="*{content}">
+                        <button type="submit">Enviar</button>
+                    </form>
+                </div>
+            </section>
+        </main>
+        <div th:replace="_fragments::footer"></div>
 
-            </div>
-        </div>
-        <div>
-            <form id="form-add-comment" th:action="@{/comments/{id}(id=${post.postId})}" th:object="${commentAdd}" method="POST">
-                <i class="bi bi-person-circle"></i>
-                <input id="content" type="text" placeholder="Escribe un comentario" th:field="*{content}">
-                <button type="submit">Enviar</button>
-            </form>
-        </div>
-    </main>
-    <div th:replace="_fragments::footer"></div>
-
-</body>
+    </body>
 </html>

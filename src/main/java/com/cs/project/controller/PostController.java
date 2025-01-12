@@ -65,7 +65,7 @@ public class PostController {
      * @param parameters parámetros de la solicitud
      * @return retorna la plantilla de perfil del usuario
      */
-    @PostMapping("/post/update/{postId}")
+    @PostMapping("/update/{postId}")
     public String updatePost(@PathVariable("postId") int postId, @RequestParam Map<String, String> parameters) {
         Post post = postService.reviewExistentPost(postId);
         String tittle = parameters.get("title");
@@ -79,6 +79,18 @@ public class PostController {
             log.warn("PostController / Post no encontrado con id: " + postId);
         }
         return "redirect:/profile";
+    }
+    
+    
+    @GetMapping("/update/{postId}")
+    public String viewFormUpdate(@PathVariable("postId") int postId, Model model) {
+        Post post = postService.reviewExistentPost(postId);
+        if (post != null) {
+            model.addAttribute("post", post);
+        } else {
+            log.warn("PostController / Post no encontrado con id: " + postId);
+        }
+        return "updatePost";
     }
 
     /**

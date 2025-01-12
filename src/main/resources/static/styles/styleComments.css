@@ -1,0 +1,92 @@
+/* 
+    Created on : Jan 11, 2025, 9:10:32 PM
+    Author     : camil
+*/
+
+.btn-dropdown {
+    border: none;
+    cursor: pointer;
+    pointer-events: auto;
+    padding: 0;
+    color: #f4f6fA;
+    background-color: transparent;
+}
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+     word-wrap: break-word;
+    
+    & form button, a{
+        font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+        font-size: 0.9rem;
+        background-color: transparent;
+        color: #f4f6fA;
+    }
+}
+.dropdown-content a {
+    text-decoration: none;
+    display: block;
+    padding: 10px;
+}
+.dropdown-content button {
+    border: none;
+    padding: 0;
+
+}
+.show {
+    display: block;
+}
+.disabled {
+    pointer-events: none;
+    opacity: 0.5;
+}
+.form-edit {
+    display: none;
+}
+.enabled{
+    cursor: pointer;
+    pointer-events: auto;
+}
+
+#section-post{
+    box-sizing: border-box;
+    background-color: #2c3034;
+    border-radius: 5px;
+    box-shadow: 0 0 10px 0 #222;
+    padding: 20px;
+    width: 80%;
+    margin: auto;
+    
+    & h2, h3{
+        margin: 0;
+    }
+}
+
+#section-comments{
+    box-sizing: border-box;
+    padding: 20px;
+    width: 80%;
+    margin: auto;
+}
+.div-title-date{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+.div-post-data{
+    box-sizing: border-box;
+    word-wrap: break-word;
+    gap: 10px;
+    & p{
+        margin: 0;
+    }
+}
+
+.p-date{
+    font-size: 0.9rem;
+}

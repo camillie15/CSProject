@@ -1,0 +1,52 @@
+/* 
+    Created on : Jan 11, 2025, 3:11:41 PM
+    Author     : Camillie Ayovi Villafuerte
+*/
+
+#section-create-post{
+    display: flex;
+    box-sizing: border-box;
+    width: 70%;
+    margin: auto;
+    padding: 30px;
+    flex-direction: column;
+    & textArea{
+        width: 100%;
+        resize: none;
+        height: 100px;
+        background: #393f40;
+        border: 1px solid #a9b7b6;
+        font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+        font-size: 1rem;
+        border-radius: 5px;
+        padding: 10px 20px;
+        color: #f4f6fA;
+    } 
+}
+
+#form-create-post {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    
+    & input[type='text']{
+        width: 40%;
+    }
+    
+    & button{
+        width: fit-content;
+        align-self: center;
+        margin-top: 10px;
+        font-weight: bold;
+        color: #a8b9f9;
+        background-color: transparent;
+        border: 2px solid #a8b9f9;
+        box-shadow: 0 0 3px 0 #a8b9f9;
+        transition: all 0.3s ease;
+        
+        &:hover{
+            background-color: #a8b9f9;
+            color: #232829;
+        }
+    }
+}
