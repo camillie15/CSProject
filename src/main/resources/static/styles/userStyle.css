@@ -1,0 +1,73 @@
+/*FORMULARIO*/
+
+.form-update-user{
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 28px;
+
+    & input[type='text'],input[type='password'], label{
+        width: 90%;
+    }
+}
+
+.grid-form-user{
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+
+    & div{
+        place-items: center;
+    }
+}
+
+.show {
+    display: block;
+}
+.form-edit {
+    display: none;
+}
+
+#btn-action{
+    font-weight: bold;
+    color: #a8b9f9;
+    background: transparent;
+    box-shadow: 0 0 5px 0 #a8b9f9;
+    transition: all 0.3s ease;
+
+    &:hover{
+        background: #a8b9f9;
+        color: #232829;
+    }
+}
+
+#btn-cancel{
+    font-weight: bold;
+    color: #f4f6fA;
+    background: #E3170A;
+    box-shadow: 0 0 5px 0 #E3170A;
+    transition: all 0.3s ease;
+    border-color: #E3170A;
+    &:hover{
+        border-color: #DE3C4B;
+        background: #DE3C4B;
+    }
+
+}
+
+#btn-update{
+    font-weight: bold;
+    color: #20fc8f;
+    background: transparent;
+    box-shadow: 0 0 5px 0 #20fc8f;
+    transition: all 0.3s ease;
+    border-color: #20fc8f;
+    &:hover{
+        background: #20fc8f;
+        color: #232829;
+    }
+}
