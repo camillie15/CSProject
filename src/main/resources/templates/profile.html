@@ -21,23 +21,23 @@
                     <div class="grid-form-user">
                         <div>
                             <label for="name">Nombre</label>
-                            <input type="text" name="name" th:value="${user.name}" disabled>
+                            <input class="disabled" type="text" name="name" th:value="${user.name}" disabled>
                         </div>
                         <div>
                             <label for="last_name">Apellido</label>
-                            <input type="text" name="last_name" th:value="${user.lastName}" disabled>
+                            <input class="disabled" type="text" name="last_name" th:value="${user.lastName}" disabled>
                         </div>
                         <div>
                             <label for="email">Correo</label>
-                            <input type="text" name="email" th:value="${user.email}" disabled>
+                            <input class="disabled" type="text" name="email" th:value="${user.email}" disabled>
                         </div>
                         <div>
                             <label for="username">Nombre de usuario</label>
-                            <input type="text" name="username" th:value="${user.userName}" disabled>
+                            <input class="disabled" type="text" name="username" th:value="${user.userName}" disabled>
                         </div>
                         <div class="container-password">
                             <label for="password">Contraseña</label>
-                            <input type="password" name="password" th:value="${user.password}" disabled> 
+                            <input class="disabled" type="password" name="password" th:value="${user.password}" disabled> 
                         </div>
                     </div>
                     <div><p th:text="${message}"></p>

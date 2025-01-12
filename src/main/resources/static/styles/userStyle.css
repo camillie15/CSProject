@@ -34,13 +34,13 @@
 
 #btn-action{
     font-weight: bold;
-    color: #a8b9f9;
+    color: #88ccff;
     background: transparent;
-    box-shadow: 0 0 5px 0 #a8b9f9;
+    box-shadow: 0 0 5px 0 #88ccff;
     transition: all 0.3s ease;
 
     &:hover{
-        background: #a8b9f9;
+        background: #88ccff;
         color: #232829;
     }
 }
@@ -88,7 +88,7 @@
     }
 
     & a{
-        color: #a8b9f9;
+        color: #88ccff;
         text-decoration: none;
     }
 
@@ -133,4 +133,16 @@
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 4;
+}
+
+#user-update .disabled{
+    font-size: 1.2rem;
+    border-color: transparent transparent #a9b7b6 transparent;
+    border-width: 2px;
+    background: transparent;
+}
+
+#user-update label{
+    font-weight: bold;
+    color: #88ccff;
 }
