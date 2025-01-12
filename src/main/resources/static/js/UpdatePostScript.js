@@ -1,3 +1,4 @@
+//Validación datos ingresados en el editar post
 function validateForm() {
     title = document.getElementById('title').value.trim();
     content = document.getElementById('content').value.trim();
