@@ -1,7 +1,7 @@
 
 
 const formLogin = document.getElementById("login-form");
-
+const message = document.querySelector(".message");
 
 formLogin.addEventListener('submit', (e) => {
     const email = formLogin.elements['email'].value.trim();
@@ -9,6 +9,7 @@ formLogin.addEventListener('submit', (e) => {
     if (testNull(email, password)) {
         e.preventDefault(); // Detiene el envío del formulario
         console.log("Campos vacíos");
+        message.textContent = "*Campos vacios";
         return; // Salir de la función si hay campos vacíos
     }
 });

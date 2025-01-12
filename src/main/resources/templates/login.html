@@ -1,24 +1,29 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
     <head>
-        <title>VoxPopulity</title>
+        <title>Login | VoxPopulity</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+        <link rel="icon" href="../images/icon-logo.png" type="image/x-icon">
         <link rel="stylesheet" href="styles/loginStyle.css"/>
         <script src="js/LoginScript.js" defer=""></script>
     </head>
     <body>
         <header>
-            <h1>VoxPopulity</h1>
+            <div style="display: flex; gap:15px; text-decoration: none;">
+                <img src="../images/icon-logo.png" width="48" height="48" alt="alt"/>
+                <h1>VoxPopulity</h1>
+            </div>
             <nav>
                 <a href="/register">Registrarse</a> 
             </nav>
         </header>
         <main class="main-container">
             <section>
-                <h2>LOGIN</h2>
-                <p style="color:#E3170A;" th:text="${message}"></p>
+                <div style="display: flex; gap:15px; align-items:center; margin-bottom: 15px;">
+                    <h2 style="margin: 0;">LOGIN</h2>
+                    <p class="message" style="color:#E3170A; margin: 0;" th:text="${message}"></p>
+                </div>
                 <form id="login-form" action="/login-submit" method="post">
                     <div>
                         <label for="email">Correo electronico</label>
