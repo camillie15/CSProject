@@ -45,35 +45,32 @@
                         <input id="btn-update" type="submit" value="Actualizar" hidden/>
                     </div>
                 </form>
-
             </section>
 
             <h2>Posts realizados</h2>
             <section>
                 <div class="post-card" th:each="post:${posts}">
-                    <h2 th:text="${post.tittle}"></h2>
-                    <p th:text="${post.userName}"></p>
-                    <p th:text="${post.createdDate}"></p>
-                    <p th:text="${post.content}"></p>
-                    <nav>
-                        <form th:action="@{/post/delete/{postId}(postId=${post.postId})}" method="POST">
-                            <button class='btn-delete' type="submit" id="delete-${post.cpostId}">Eliminar</button>
-                        </form> 
-                        <a onclick="editPost(event)" id="edit-${post.postId}" th:data-post-id="${post.postId}">Editar</a>
-                    </nav>
-                    <div>
-                        <form method="POST" th:action="@{/post/update/{postId}(postId=${post.postId})}" class="form-edit" th:id="'form-edit-' + ${post.postId}">
-                            <label>Titulo</label>
-                            <input type="text" th:value="${post.tittle}" name="title">
-                            <label>Contenido</label>
-                            <input type="text" th:value="${post.content}" name="content">
-                            <button type="submit">Actualizar</button>
-                            <button type="button" id="btn-cancelar" th:data-post-id="${post.postId}" onclick="cancelEdit(event)">Cancelar</button>
-                        </form>
+                    <div class="header-card">
+                        <div class="info-card">
+                            <a th:href="@{/comments/{postId}(postId=${post.postId})}">
+                                <h2 th:text="${post.tittle}"></h2>
+                            </a>
+                            <p th:text="${#temporals.format(post.createdDate, 'dd-MM-yyyy | HH:mm')}"></p> 
+                        </div>
+
+                        <nav class="nav-action">
+                            <a class="btn-update" th:href="@{/update/{postId}(postId=${post.postId})}" id="edit-${post.postId}" th:data-post-id="${post.postId}">Editar</a>
+                            <form th:action="@{/post/delete/{postId}(postId=${post.postId})}" method="POST">
+                                <button class='btn-delete' type="submit" id="delete-${post.cpostId}">Eliminar</button>
+                            </form> 
+                        </nav>
                     </div>
+
+                    <h3 th:text="${post.userName}"></h3>           
+                    <p class="content-card" th:text="${post.content}"></p>
+
                 </div>
             </section>
-
         </main>
 
         <div th:replace="_fragments::footer"></div>
