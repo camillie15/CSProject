@@ -15,7 +15,15 @@
 
         <div th:replace="_fragments::header"></div>
         <main>
-            <h2><span th:text="${user.userName}"/> Perfil</h2>
+            <div style="display: flex; place-items: center; gap:15px;">
+                <h2>
+                    <i style="color: #EDF7FF; margin-right:8px;" class="bi bi-person-fill">    
+                    </i>
+                    <span th:text="${user.userName}"/> 
+                    Perfil</h2>
+                <p style="color: #20fc8f;" th:text="${message}"></p>
+            </div>
+
             <section>
                 <form class="form-update-user" id="user-update" action="/update-user" method="POST"> 
                     <div class="grid-form-user">
@@ -40,7 +48,7 @@
                             <input class="disabled" type="password" name="password" th:value="${user.password}" disabled> 
                         </div>
                     </div>
-                    <div><p th:text="${message}"></p>
+                    <div>
                         <input id="btn-action" type="button" value="Actualizar usuario">
                         <input id="btn-cancel" type="button" value="Cancelar" hidden>
                         <input id="btn-update" type="submit" value="Actualizar" hidden/>
@@ -53,6 +61,7 @@
                 <div class="post-card" th:each="post:${posts}">
                     <div class="header-card">
                         <div class="info-card">
+                            <i style="color: #88ccff; font-size: 1.2rem; margin-right: -8px;" class="bi bi-link-45deg"></i>
                             <a th:href="@{/comments/{postId}(postId=${post.postId})}">
                                 <h2 th:text="${post.tittle}"></h2>
                             </a>
