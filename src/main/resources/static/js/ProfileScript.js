@@ -1,5 +1,5 @@
 const btnAction = document.getElementById("btn-action");
-const inputsConfig = document.querySelectorAll('#user-update input[type="text"]');
+const inputsConfig = document.querySelectorAll('#user-update input[type="text"], input[type="password"]');
 const btnUpdate = document.getElementById("btn-update");
 const btnCancel = document.getElementById("btn-cancel");
 

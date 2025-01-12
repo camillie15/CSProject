@@ -4,31 +4,49 @@
         <title>VoxPopulity</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="styles/styles.css"/>
+        <link rel="stylesheet" href="styles/registerStyle.css"/>
         <script src="js/RegisterScript.js" defer=""></script>
     </head>
     <body>
-        <h1>User register</h1>
-        <p th:text="${message}"></p>
-        <form id="user-register" action="/submit-register" method="post">
-            <label for="name">Nombre</label>
-            <input type="text" name="name" placeholder="Inserte su nombre">
+        <header>
+            <h1>VoxPopulity</h1>
+            <nav>
+                <a href="/login">Iniciar Sesión</a> 
+            </nav>
+        </header>
+        <main>
+            <h2>Registrarme</h2>
+            <p th:text="${message}"></p>
+            <form id="user-register" action="/submit-register" method="post">
+                <div class="form-container-grid">
+                    <div>
+                        <label for="name">Nombre</label>
+                        <input type="text" name="name" placeholder="Inserte su nombre">
+                    </div>
+                    <div>
+                        <label for="name">Apellidos</label>
+                        <input type="text" name="last_name" placeholder="Inserte sus apellidos">
+                    </div>
+                    <div>
+                        <label for="name">Correo</label>
+                        <input type="text" name="email" placeholder="Inserte su correo">
+                    </div>
+                    <div>
+                        <label for="name">Nombre de usuario</label>
+                        <input type="text" name="username" placeholder="Inserte su nombre de usuario">
+                    </div>
+                </div>
+                <div>
+                    <label for="name">Contraseña</label>
+                    <input type="password" name="password" placeholder="Ingrese su contraseña">
+                </div>
+                <div>
+                    <label for="name">Repetir contraseña</label>
+                    <input type="password" name="pass" placeholder="Vuelva a ingresar su contraseña">
+                </div>
+                <input id="btn-register" type="submit" value="Registrarme" name="btn_form" />
+            </form>   
+        </main>
 
-            <label for="name">Apellidos</label>
-            <input type="text" name="last_name" placeholder="Inserte sus apellidos">
-            <label for="name">Correo</label>
-            <input type="text" name="email" placeholder="Inserte su correo">
-
-            <label for="name">Nombre de usuario</label>
-            <input type="text" name="username" placeholder="Inserte su nombre de usuario">
-
-            <label for="name">Contraseña</label>
-            <input type="password" name="password" placeholder="Ingrese su contraseña">
-
-            <label for="name">Repetir contraseña</label>
-            <input type="password" name="pass" placeholder="Vuelva a ingresar su contraseña">
-
-            <input type="submit" value="Registrarme" name="btn_form" />
-        </form>
     </body>
 </html>
