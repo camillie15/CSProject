@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
     <head>
-        <title>Comentarios</title>
+        <title>Post | VoxPopulity</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="/styles/styleComments.css"/>
@@ -14,13 +14,15 @@
         <main>
             <section id="section-post">
                 <div class="div-title-date">
-                    <h2 th:text="${post.tittle}"></h2>
+                    <h2 style="color: #88ccff;" th:text="${post.tittle}"></h2>
                     <p class="p-date" th:text="${#temporals.format(post.createdDate, 'dd-MM-yyyy | HH:mm')}"></p>
                 </div>
                 <h3 th:text="${post.userName}"></h3>
                 <p th:text="${post.content}"></p>
             </section>
             <section id="section-comments">
+                            <h2>Comentarios</h2>
+
                 <div th:if="${comments.isEmpty()}">
                     <p>No hay comentarios aún.</p>
                 </div>
@@ -43,9 +45,9 @@
                     <div class="form-edit" th:id="'div-form-edit-' + ${comment.commentId}">
                         <form method="POST" th:action="@{/comments/{postId}/update/{commentId}(postId=${post.postId}, commentId=${comment.commentId})}">
                             <input type="hidden" id="user-id-logged" th:data-user-logged-id="${userIdLogged}">
-                            <input type="text" th:value="${comment.content}" name="content">
+                            <input type="text" th:value="${comment.content}" name="content" maxlength="500">
                             <div class="div-edit-buttons">
-                                <button type="submit">Actualizar</button>
+                                <button class="btn-submit" type="submit">Actualizar</button>
                                 <button type="button" id="btn-cancelar" th:data-comment-id="${comment.commentId}" onclick="cancelEdit(event)">Cancelar</button>
 
                             </div>
@@ -55,8 +57,8 @@
                 <div id="div-form-comment">
                     <form id="form-add-comment" th:action="@{/comments/{id}(id=${post.postId})}" th:object="${commentAdd}" method="POST">
                         <i class="bi bi-person-circle" id="icon-user"></i>
-                        <input id="content" type="text" placeholder="Escribe un comentario" th:field="*{content}">
-                        <button type="submit">Enviar</button>
+                        <input id="content" type="text" placeholder="Escribe un comentario" th:field="*{content}" maxlength="500">
+                        <button class="btn-submit" type="submit">Enviar</button>
                     </form>
                 </div>
             </section>

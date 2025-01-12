@@ -15,9 +15,7 @@ function commentOptions() {
 
     const editButtons = document.querySelectorAll('.btn-update');
     const deleteButtons = document.querySelectorAll('.btn-delete');
-
     const userLoggedId = document.getElementById("user-id-logged").getAttribute("data-user-logged-id");
-
 
     editButtons.forEach(editButton => {
         const commentUserId = editButton.getAttribute("data-user-id");
@@ -46,7 +44,7 @@ document.addEventListener('DOMContentLoaded', commentOptions);
 function editComment(event) {
     const a = event.target;
     const commentId = a.getAttribute("data-comment-id");
-    
+
     const allForms = document.querySelectorAll('.show');
     allForms.forEach(form => {
         form.classList.remove('show');
