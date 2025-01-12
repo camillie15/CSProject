@@ -9,54 +9,50 @@ formComment.addEventListener("submit", (event) => {
     }
 });
 
-//Función para apertura y cierre de dropdown
-function commentOptions(event) {
+//Función para interaccciones con los botones de editar y eliminar
+function commentOptions() {
     event.stopPropagation();
-    const button = event.target;
-    const commentId = button.getAttribute("data-comment-id");
 
-    const allDropdowns = document.querySelectorAll('.dropdown-content');
-    allDropdowns.forEach(dropdown => {
-        if (dropdown.id !== `comment-dropdown-${commentId}`) {
-            dropdown.classList.remove('show');
+    const editButtons = document.querySelectorAll('.btn-update');
+    const deleteButtons = document.querySelectorAll('.btn-delete');
+
+    const userLoggedId = document.getElementById("user-id-logged").getAttribute("data-user-logged-id");
+
+
+    editButtons.forEach(editButton => {
+        const commentUserId = editButton.getAttribute("data-user-id");
+        if (commentUserId !== userLoggedId) {
+            editButton.classList.add("disabled");
+            editButton.setAttribute("onclick", "return false;");
+        } else {
+            editButton.classList.remove("disabled");
         }
     });
 
-    const dropdown = document.getElementById(`comment-dropdown-${commentId}`);
-
-    const commentUserId = button.getAttribute("data-user-id");
-    const userLoggedId = document.getElementById("user-id-logged").getAttribute("data-user-logged-id");
-
-    if (commentUserId !== userLoggedId) {
-        dropdown.classList.remove("btn-dropdown");
-        dropdown.classList.add("disabled");
-    } else {
-        dropdown.classList.remove("form-edit");
-        dropdown.classList.toggle('show');
-    }
+    deleteButtons.forEach(deleteButton => {
+        const commentUserId = deleteButton.getAttribute("data-user-id");
+        if (commentUserId !== userLoggedId) {
+            deleteButton.classList.add("disabled");
+            deleteButton.setAttribute("onclick", "return false;");
+        } else {
+            deleteButton.classList.remove("disabled");
+        }
+    });
 }
+document.addEventListener('DOMContentLoaded', commentOptions);
 
-//Cierre de dropdown en un clic en cualquier lugar de la ventana
-window.onclick = function (event) {
-    if (!event.target.matches('.btn-dropdown') && !event.target.closest('.dropdown')) {
-        const dropdowns = document.querySelectorAll('.dropdown-content');
-        dropdowns.forEach(dropdown => {
-            dropdown.classList.remove('show');
-        });
-    }
-}
 
 //Función para visualización de formulario para editar comentario
 function editComment(event) {
     const a = event.target;
     const commentId = a.getAttribute("data-comment-id");
-
+    
     const allForms = document.querySelectorAll('.show');
     allForms.forEach(form => {
         form.classList.remove('show');
         form.classList.add('form-edit');
     });
-    
+
     const formEdit = document.getElementById(`div-form-edit-${commentId}`);
     if (formEdit) {
         formEdit.classList.remove('form-edit');

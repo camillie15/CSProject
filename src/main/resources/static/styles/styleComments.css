@@ -2,65 +2,75 @@
     Created on : Jan 11, 2025, 9:10:32 PM
     Author     : camil
 */
-
-.btn-dropdown {
-    border: none;
-    cursor: pointer;
-    pointer-events: auto;
-    padding: 0;
-    color: #f4f6fA;
-    background-color: transparent;
-}
-.dropdown {
-    position: relative;
-    display: inline-block;
-}
-.dropdown-content {
-    display: none;
-    position: absolute;
-     word-wrap: break-word;
-    
-    & form button, a{
-        font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-        font-size: 0.9rem;
-        background-color: transparent;
-        color: #f4f6fA;
-    }
-}
-.dropdown-content a {
-    text-decoration: none;
-    display: block;
-    padding: 10px;
-}
-.dropdown-content button {
-    border: none;
-    padding: 0;
-
-}
 .show {
-    display: block;
-}
-.disabled {
-    pointer-events: none;
-    opacity: 0.5;
+    width: 90%;
+    display: flex;
+    margin: auto;
+    margin-top: 5px;
+    & form{
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 10px;
+
+        & input{
+            flex-grow: 1;
+        }
+
+        & button[type='submit']{
+            width: fit-content;
+            align-self: center;
+            font-weight: bold;
+            color: #a8b9f9;
+            background-color: transparent;
+            border: 2px solid #a8b9f9;
+            box-shadow: 0 0 3px 0 #a8b9f9;
+            transition: all 0.3s ease;
+
+            &:hover{
+                background-color: #a8b9f9;
+                color: #232829;
+            }
+        }
+        & button[type='button']{
+            width: fit-content;
+            align-self: center;
+            font-weight: bold;
+            color: #E3170A;
+            background-color: transparent;
+            border: 2px solid #E3170A;
+            box-shadow: 0 0 3px 0 #E3170A;
+            transition: all 0.3s ease;
+
+            &:hover{
+                background-color: #E3170A;
+                color: #232829;
+            }
+        }
+    }
+
 }
 .form-edit {
     display: none;
 }
-.enabled{
-    cursor: pointer;
-    pointer-events: auto;
-}
 
 #section-post{
     box-sizing: border-box;
+    display: grid;
+    grid-template-rows: auto auto auto;
+    word-wrap: break-word;
     background-color: #2c3034;
     border-radius: 5px;
     box-shadow: 0 0 10px 0 #222;
     padding: 20px;
     width: 80%;
     margin: auto;
-    
+
+    & p{
+                overflow: hidden;
+
+    }
     & h2, h3{
         margin: 0;
     }
@@ -77,16 +87,98 @@
     flex-direction: row;
     align-items: center;
     gap: 10px;
-}
-.div-post-data{
-    box-sizing: border-box;
-    word-wrap: break-word;
-    gap: 10px;
-    & p{
+
+    & h2{
+
         margin: 0;
     }
 }
 
+
 .p-date{
     font-size: 0.9rem;
+}
+
+#div-form-comment{
+
+    & form{
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+        width: 100%;
+        margin-top: 25px;
+
+        & input{
+            flex-grow: 1;
+        }
+
+        & i{
+            font-size: 2.5rem;
+        }
+    }
+}
+.div-comment{
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+.div-comment-data{
+    width: 90%;
+    box-sizing: border-box;
+    word-wrap: break-word;
+    display: grid;
+    grid-template-rows: auto auto;
+    gap: 10px;
+    margin: auto;
+    & p{
+        overflow: hidden;
+        margin: 0;
+    }
+
+}
+.div-comment-header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.nav-action{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    & button{
+        border:none;
+        color: #E3170A;
+        padding: 2px 6px ;
+        border-bottom:2px solid #E3170A;
+        background: none;
+        border-radius: 2px;
+    }
+
+    & a{
+        color: #20fc8f;
+        padding: 2px 6px ;
+        border-bottom:2px solid #20fc8f;
+        border-radius: 2px;
+    }
+}
+
+.btn-update.disabled, .btn-delete.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+
+}
+
+.btn-update, .btn-delete {
+    cursor: pointer;
+
+}
+.edit-buttons {
+    display: flex;
+    gap: 10px;
+    flex-direction: row;
 }

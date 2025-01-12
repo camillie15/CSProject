@@ -24,42 +24,37 @@
                 <div th:if="${comments.isEmpty()}">
                     <p>No hay comentarios aún.</p>
                 </div>
-                <div>
-                    <div th:each="comment : ${comments}">
-                        <div>
-                            <div class="dropdown">
-                                <button onclick="commentOptions(event)" th:id="'button-dropdown-' + ${comment.commentId}" class="btn-dropdown" 
-                                        th:data-comment-id="${comment.commentId}" th:data-user-id="${comment.userId}">
-                                    ...
-                                </button>
-                                <div th:id="'comment-dropdown-' + ${comment.commentId}" class="dropdown-content">
-                                    <a onclick="editComment(event)" id="edit-${comment.commentId}" th:data-comment-id="${comment.commentId}">Editar</a>
-
-                                    <form th:action="@{'/comments/' + ${post.postId} + '/delete/' + ${comment.commentId}}" method="POST">
-                                        <button type="submit" id="delete-${comment.commentId}">Eliminar</button>
-                                    </form>                            
-                                </div>
+                <div class="div-comment" th:each="comment : ${comments}">
+                    <div class="div-comment-data">
+                        <div class="div-comment-header">
+                            <div class="div-title-date">
+                                <h2 th:text="${comment.userName}"></h2>
+                                <p class="p-date" th:text="${#temporals.format(comment.createdDate, 'dd-MM-yyyy | HH:mm')}"></p>
                             </div>
-                            <p><strong></strong> <span th:text="${comment.userName}"></span></p>
-                            <p th:text="${#temporals.format(comment.createdDate, 'dd-MM-yyyy | HH:mm')}"></p>
-                            <p th:text="${comment.content}"></p>
+                            <nav class="nav-action">
+                                <a class="btn-update" onclick="editComment(event)" id="edit-${comment.commentId}" th:data-comment-id="${comment.commentId}" th:data-user-id="${comment.userId}">Editar</a>
+                                <form th:action="@{'/comments/' + ${post.postId} + '/delete/' + ${comment.commentId}}" method="POST">
+                                    <button class="btn-delete" type="submit" id="delete-${comment.commentId}" th:data-user-id="${comment.userId}">Eliminar</button>
+                                </form> 
+                            </nav>
                         </div>
-                        <div class="form-edit" th:id="'div-form-edit-' + ${comment.commentId}">
-                            <form method="POST" th:action="@{/comments/{postId}/update/{commentId}(postId=${post.postId}, commentId=${comment.commentId})}" class="form-edit-comment">
-                                <input type="hidden" id="user-id-logged" th:data-user-logged-id="${userIdLogged}">
-                                <input type="text" th:value="${comment.content}" name="content">
+                        <p th:text="${comment.content}"></p>
+                    </div>
+                    <div class="form-edit" th:id="'div-form-edit-' + ${comment.commentId}">
+                        <form method="POST" th:action="@{/comments/{postId}/update/{commentId}(postId=${post.postId}, commentId=${comment.commentId})}">
+                            <input type="hidden" id="user-id-logged" th:data-user-logged-id="${userIdLogged}">
+                            <input type="text" th:value="${comment.content}" name="content">
+                            <div class="div-edit-buttons">
                                 <button type="submit">Actualizar</button>
                                 <button type="button" id="btn-cancelar" th:data-comment-id="${comment.commentId}" onclick="cancelEdit(event)">Cancelar</button>
-                            </form>
-                        </div>
 
+                            </div>
+                        </form>
                     </div>
-
                 </div>
-                </div>
-                <div>
+                <div id="div-form-comment">
                     <form id="form-add-comment" th:action="@{/comments/{id}(id=${post.postId})}" th:object="${commentAdd}" method="POST">
-                        <i class="bi bi-person-circle"></i>
+                        <i class="bi bi-person-circle" id="icon-user"></i>
                         <input id="content" type="text" placeholder="Escribe un comentario" th:field="*{content}">
                         <button type="submit">Enviar</button>
                     </form>

@@ -31,7 +31,8 @@ public class CommentRepository {
         try {
             String query = "SELECT c.*, u.username AS userName FROM Comments c "
                     + "JOIN Users u ON c.userId = u.userId "
-                    + "WHERE postId = ?";
+                    + "WHERE postId = ? "
+                    + "ORDER BY c.createdDate ASC";
             return jdbcTemplate.query(query, new CommentRowMapper(), postId);
         } catch (DataAccessException e) {
             log.error("SQL query / Error: " + e);
