@@ -12,12 +12,6 @@
     </head>
     <body>
         <div th:replace="_fragments::header"></div>
-
-        <header>
-            <a href="/createPost">
-                <button>Create post</button>
-            </a>
-        </header>
         <main>
             <section id="section-posts">
                 <div th:each="post : ${posts}"  class="div-post">

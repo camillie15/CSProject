@@ -6,17 +6,21 @@
 #section-create-post{
     display: flex;
     box-sizing: border-box;
-    width: 80%;
+    width: 70%;
     margin: auto;
     padding: 30px;
     flex-direction: column;
-    background-color: #2c3034;
     & textArea{
         width: 100%;
         resize: none;
         height: 100px;
         background: #393f40;
         border: 1px solid #a9b7b6;
+        font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+        font-size: 1rem;
+        border-radius: 5px;
+        padding: 10px 20px;
+        color: #f4f6fA;
     } 
 }
 
