@@ -67,11 +67,15 @@ header{
     top: 20px;
     border-radius: 5px;
     box-shadow: 0 0 10px 0 #222;
+    
+    & a{
+        text-decoration: none;
+    }
 
     & h1{
         margin: 0;
-        color: #D3DAEA;
-        text-shadow: 0 0 5px #a8b9f9;
+        color: #b9dfff;
+        text-shadow: 0 0 5px #ed7fff;
     }
 
     & nav{

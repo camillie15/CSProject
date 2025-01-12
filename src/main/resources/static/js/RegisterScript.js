@@ -1,5 +1,6 @@
 //Metodo para comprobar que ningun campo se ingrese vacio y con su respectivo formato 
 const formRegister = document.getElementById("user-register");
+const message = document.querySelector(".message");
 
 formRegister.addEventListener('submit', (e) => {
     const name = formRegister.elements['name'].value.trim();
@@ -12,10 +13,12 @@ formRegister.addEventListener('submit', (e) => {
     if (testNull(name, last_name, username, email, password, pass)) {
         e.preventDefault(); // Detiene el envío del formulario
         console.log("Campos vacíos");
+        message.textContent = "*Campos vacios";
         return; // Salir de la función si hay campos vacíos
     } else if (comparePass(password, pass)) {
         e.preventDefault(); // Detiene el envío del formulario
         console.log("Contraseñas diferentes");
+        message.textContent = "*Las contraseñas no coinciden";
         return; // Salir de la función si hay campos vacíos
     }
 
