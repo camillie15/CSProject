@@ -58,6 +58,9 @@
 
             <h2>Posts realizados</h2>
             <section>
+                <div th:if="${posts.isEmpty()}">
+                    <p style="color:#399af2">No hay comentarios aún.</p>
+                </div>
                 <div class="post-card" th:each="post:${posts}">
                     <div class="header-card">
                         <div class="info-card">
