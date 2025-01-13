@@ -81,7 +81,13 @@ public class PostController {
         return "redirect:/profile";
     }
     
-    
+    /**
+     * Método para la visualización del formulario para la actualización del post
+     * 
+     * @param postId identificador del post a actualizar
+     * @param model pasa el formulario a la vista
+     * @return 
+     */
     @GetMapping("/update/{postId}")
     public String viewFormUpdate(@PathVariable("postId") int postId, Model model) {
         Post post = postService.reviewExistentPost(postId);

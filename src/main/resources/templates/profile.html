@@ -72,7 +72,7 @@
                         </div>
 
                         <nav class="nav-action">
-                            <a class="btn-update" th:href="@{/update/{postId}(postId=${post.postId})}" id="edit-${post.postId}" th:data-post-id="${post.postId}">Editar</a>
+                            <a class="btn-update" th:href="@{/update/{postId}(postId=${post.postId})}" id="edit-${post.postId}" th:data-post-id="${post.postId}">Actualizar</a>
                             <form th:action="@{/post/delete/{postId}(postId=${post.postId})}" method="POST">
                                 <button class='btn-delete' type="submit" id="delete-${post.cpostId}">Eliminar</button>
                             </form> 
