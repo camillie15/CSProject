@@ -6,6 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="/styles/styleComments.css"/>
         <link rel="stylesheet" href="/styles/styles.css"/>
+        <link rel="icon" href="../images/icon-logo.png" type="image/x-icon">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
         <script src="/js/CommentScript.js" defer=""></script>
     </head>
@@ -35,7 +36,7 @@
                                 <p class="p-date" th:text="${#temporals.format(comment.createdDate, 'dd-MM-yyyy | HH:mm')}"></p>
                             </div>
                             <nav class="nav-action">
-                                <a class="btn-update" onclick="editComment(event)" id="edit-${comment.commentId}" th:data-comment-id="${comment.commentId}" th:data-user-id="${comment.userId}">Editar</a>
+                                <a class="btn-update" onclick="editComment(event)" id="edit-${comment.commentId}" th:data-comment-id="${comment.commentId}" th:data-user-id="${comment.userId}">Actualizar</a>
                                 <form th:action="@{'/comments/' + ${post.postId} + '/delete/' + ${comment.commentId}}" method="POST">
                                     <button class="btn-delete" type="submit" id="delete-${comment.commentId}" th:data-user-id="${comment.userId}">Eliminar</button>
                                 </form> 
