@@ -5,9 +5,19 @@ formComment.addEventListener("submit", (event) => {
     const content = document.getElementById("content").value.trim();
     if (content === "") {
         event.preventDefault();
-        alert("El comentario no debe estar vacio ni contener solo espacios en blanco.");
+        const div = document.getElementById("header-comment");
+        const errorMessage = document.createElement("span");
+        errorMessage.textContent = "Los campos son obligatorios";
+        errorMessage.style.color = "red";
+        errorMessage.style.fontWeight = "bold";
+        errorMessage.id = "error-message";
+        const existingError = document.getElementById("error-message");
+        if (!existingError) {
+            div.appendChild(errorMessage);
+        }
     }
 });
+
 
 //Función para interaccciones con los botones de editar y eliminar
 function commentOptions() {
@@ -67,9 +77,33 @@ allEditForms.forEach(form => {
         const content = form.elements['content'].value.trim();
         if (content === "") {
             event.preventDefault();
-            alert("El comentario no debe estar vacío ni contener solo espacios en blanco.");
+            const div = document.getElementById("header-comment");
+        const errorMessage = document.createElement("span");
+        errorMessage.textContent = "Los campos son obligatorios";
+        errorMessage.style.color = "red";
+        errorMessage.style.fontWeight = "bold";
+        errorMessage.id = "error-message";
+        const existingError = document.getElementById("error-message");
+        if (!existingError) {
+            div.appendChild(errorMessage);
+        }
         }
     });
+});
+
+//Al seleccionar el input se borra el span de campos obligatorios
+const contentEditInput = document.getElementById("content-comment");
+const contentAddInput = document.getElementById("content");
+const inputs = [contentEditInput, contentAddInput];
+inputs.forEach( input => {
+   if(input){
+       input.addEventListener("focus", () => {
+    const errorMessage = document.getElementById("error-message");
+    if (errorMessage) {
+        errorMessage.remove();
+    }
+}); 
+   }
 });
 
 //Función para cancelar y cerrar formulario de editar comentario

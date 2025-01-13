@@ -2,8 +2,7 @@
     Created on : Jan 11, 2025, 3:11:41 PM
     Author     : Camillie Ayovi Villafuerte
 */
-
-#section-create-post, #section-update-post{
+#section-post{
     display: flex;
     box-sizing: border-box;
     width: 70%;
@@ -25,7 +24,7 @@
     }
 }
 
-#form-create-post, #form-update-post {
+#form-post {
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -72,4 +71,11 @@
 #content::-webkit-scrollbar-track {
     background: #393f40; /* Color de la vía (el área por donde se mueve el pulgar) */
     border-radius: 10px;
+}
+
+#header-post{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
 }

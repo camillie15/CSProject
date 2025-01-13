@@ -5,21 +5,23 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Actualizar Post | VoxPopulity</title>
         <link rel="stylesheet" href="/styles/styles.css"/>
-        <link rel="stylesheet" href="/styles/styleCreatePost.css"/>
+        <link rel="stylesheet" href="/styles/stylePost.css"/>
         <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.6.0/uicons-regular-straight/css/uicons-regular-straight.css'>
-        <script src="/js/UpdatePostScript.js" defer=""></script>
+        <script src="/js/PostScript.js" defer=""></script>
     </head>
     <body>
         <div th:replace="_fragments::header"></div>
         <main>
-            <section id="section-update-post">
+            <section id="section-post">
+                <div id="header-post">
                 <h2>Actualizar post</h2>
-                <form id="form-update-post" th:action="@{/update/{postId}(postId=${post.postId})}" method="POST" onsubmit="validateForm()">
+            </div>
+                <form id="form-post" th:action="@{/update/{postId}(postId=${post.postId})}" method="POST">
                     <label for="tittle">Titulo</label>
                     <input type="text" id="title" placeholder="Titulo" th:value="${post.tittle}" name="title" maxlength="50">
                     <label for="content">Contenido</label>
                     <textarea id="content" placeholder="Contenido" th:text="${post.content}" name="content" maxlength="500"></textarea>
-                    <button type="submit" id="btn-update">Actualizar</button>
+                    <button type="submit" id="btn-post">Actualizar</button>
                 </form>
             </section>
         </main>
