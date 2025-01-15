@@ -26,7 +26,7 @@ Para poner en marcha el sistema, es necesario configurar la base de datos MySQL 
    - **Contraseña:** `12345`
    - **Host:** `localhost`
    - **Puerto:** `3306`
-   -**Nombre de la BD:** `voxpopulity`
+   -**Nombre de la BD:** `voxpopulidb`
 
 ---
 
@@ -34,7 +34,7 @@ Para poner en marcha el sistema, es necesario configurar la base de datos MySQL 
 
 1. Clona el repositorio:
    ```bash
-   git clone https://github.com/tu_usuario/VoxPopulity.git
+   https://github.com/camillie15/CSProject.git
    ```
 
 2. Accede al directorio del proyecto:
@@ -44,10 +44,10 @@ Para poner en marcha el sistema, es necesario configurar la base de datos MySQL 
 
 3. Configura el archivo `application.properties`:
    ```properties
-   spring.datasource.url=jdbc:mysql://localhost:3306/voxpopulity
+   spring.datasource.url=jdbc:mysql://localhost:3306/voxpopulidb
    spring.datasource.username=user_admin
    spring.datasource.password=12345
-   spring.jpa.hibernate.ddl-auto=update
+   spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
    ```
 
 4. Ejecuta el proyecto:
