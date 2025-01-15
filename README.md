@@ -16,7 +16,7 @@ Para poner en marcha el sistema, es necesario configurar la base de datos MySQL 
 
 1. **Importar el script de base de datos:**
    
-   Ejecuta el script ubicado en `./ScriptDB` para crear las tablas necesarias:
+   Ejecuta el script ubicado en `./src/main/resources/ScriptDB.sql` para crear las tablas necesarias:
    - `Users`
    - `Posts`
    - `Comments`
