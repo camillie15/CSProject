@@ -12,17 +12,19 @@ public class User {
     private String email;
     private String userName;
     private String password;
+    private int rol;
 
     //Constructores
     public User() {
     }
 
-    public User(String name, String lastName, String email, String userName, String password) {
+    public User(String name, String lastName, String email, String userName, String password, int rol) {
         this.name = name;
         this.lastName = lastName;
         this.email = email;
         this.userName = userName;
         this.password = password;
+        this.rol = rol;
     }
 
     //Metodos Get & Set
@@ -64,6 +66,14 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public int getRol() {
+        return rol;
+    }
+
+    public void setRol(int rol) {
+        this.rol = rol;
     }
 
     //Metodo ToString

@@ -3,6 +3,9 @@ package com.cs.project.controller;
 import com.cs.project.service.User.UserServiceImpl;
 import jakarta.servlet.http.HttpSession;
 import java.util.Map;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +22,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 public class UserController {
 
+    private static final Logger log = LoggerFactory.getLogger(UserController.class);
     private final UserServiceImpl userService;
 
     @Autowired
@@ -57,7 +61,7 @@ public class UserController {
         String email = allParams.get("email");
         String userName = allParams.get("username");
         String password = allParams.get("password");
-        boolean flag = userService.userRegister(name, lastName, email, userName, password);
+        boolean flag = userService.userRegister(name, lastName, email, userName, password, 1);
         if (flag) {
             return "redirect:/login";
         } else {

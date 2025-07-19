@@ -3,6 +3,8 @@ package com.cs.project.controller;
 import com.cs.project.model.Post;
 import com.cs.project.service.Post.PostServiceImpl;
 import java.util.List;
+
+import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,9 +34,10 @@ public class HomeController {
      * @return retorna la plantilla home
      */
     @GetMapping({"/home" , "/"})
-    public String home(Model model) {
+    public String home(Model model, HttpSession session) {
         List<Post> posts = postService.reviewExistentPosts();
         model.addAttribute("posts", posts);
+        model.addAttribute("rol", (int) session.getAttribute("userRolLogged"));
         return "home";
     }
 }

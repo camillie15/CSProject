@@ -40,6 +40,7 @@ public class UserProfileController {
         List<Post> posts = userService.getPostsByUser(session);
         model.addAttribute("user", user);
         model.addAttribute("posts", posts);
+        model.addAttribute("rol", (int) session.getAttribute("userRolLogged"));
         return "profile";
     }
 
