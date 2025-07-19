@@ -116,9 +116,13 @@ public class PostController {
      * @return retorna la plantilla de perfil del usuario
      */
     @PostMapping("/post/delete/{postId}")
-    public String deletePost(@PathVariable("postId") int postId) {
+    public String deletePost(@PathVariable("postId") int postId, HttpSession session) {
         postService.reviewPostForDelete(postId);
         log.info("PostController / Post con id: " + postId + " eliminado");
-        return "redirect:/profile";
+        if ((int) session.getAttribute("userRolLogged") == 1){
+            return "redirect:/profile";
+        } else {
+            return "redirect:/home";
+        }
     }
 }

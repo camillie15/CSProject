@@ -1,7 +1,9 @@
 //Validación de datos ingresados
 const formComment = document.getElementById("form-add-comment");
+const rol = document.getElementById("user-rol-logged").getAttribute("data-user-logged-rol");
 
-formComment.addEventListener("submit", (event) => {
+if (rol == 1){
+    formComment.addEventListener("submit", (event) => {
     const content = document.getElementById("content").value.trim();
     if (content === "") {
         event.preventDefault();
@@ -17,6 +19,7 @@ formComment.addEventListener("submit", (event) => {
         }
     }
 });
+}
 
 
 //Función para interaccciones con los botones de editar y eliminar
@@ -29,7 +32,7 @@ function commentOptions() {
 
     editButtons.forEach(editButton => {
         const commentUserId = editButton.getAttribute("data-user-id");
-        if (commentUserId !== userLoggedId) {
+        if (commentUserId != userLoggedId) {
             editButton.classList.add("disabled");
             editButton.setAttribute("onclick", "return false;");
         } else {
@@ -39,7 +42,7 @@ function commentOptions() {
 
     deleteButtons.forEach(deleteButton => {
         const commentUserId = deleteButton.getAttribute("data-user-id");
-        if (commentUserId !== userLoggedId) {
+        if (commentUserId != userLoggedId && rol == 1) {
             deleteButton.classList.add("disabled");
             deleteButton.setAttribute("onclick", "return false;");
         } else {
