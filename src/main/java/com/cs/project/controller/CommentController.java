@@ -51,6 +51,7 @@ public class CommentController {
             model.addAttribute("comments", comments);
             model.addAttribute("commentAdd", commentAdd);
             model.addAttribute("userIdLogged", (int) session.getAttribute("userIdLogged"));
+            model.addAttribute("rol", (int) session.getAttribute("userRolLogged"));
         } else {
             log.warn("CommentController / No se encontró el post con ese id: " + postId);
         }
@@ -71,7 +72,6 @@ public class CommentController {
         if (postService.reviewExistentPost(postId) != null) {
             commentService.reviewDataCommentForAdd(content, postId, session);
             log.info("CommentController / Comentario creado");
-
         } else {
             log.warn("CommentController / No se encontró el post con ese id: " + postId);
         }
@@ -112,7 +112,6 @@ public class CommentController {
     public String deleteComment(@PathVariable("postId") int postId, @PathVariable("commentId") int commentId) {
         commentService.reviewCommentForDelete(commentId);
         log.info("CommentController / Comentario con id: " + commentId + " eliminado");
-
         return "redirect:/comments/{postId}";
     }
 }

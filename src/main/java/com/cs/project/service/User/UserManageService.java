@@ -10,7 +10,7 @@ import jakarta.servlet.http.HttpSession;
  */
 public interface UserManageService {
     
-    boolean userRegister(String name, String lastName, String email, String userName, String password);
+    boolean userRegister(String name, String lastName, String email, String userName, String password, int rol);
     
     User findUser(HttpSession session);
     

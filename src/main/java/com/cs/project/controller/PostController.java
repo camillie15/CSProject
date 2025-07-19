@@ -36,10 +36,14 @@ public class PostController {
      * @return retorna la plantilla del formulario crear post
      */
     @GetMapping("/createPost")
-    public String viewPostForm(Model model) {
-        Post post = new Post();
-        model.addAttribute("post", post);
-        return "createPost";
+    public String viewPostForm(Model model, HttpSession session) {
+        if ((int) session.getAttribute("userRolLogged") == 1) {
+            Post post = new Post();
+            model.addAttribute("post", post);
+            return "createPost";
+        } else {
+            return "redirect:/home";
+        }
     }
 
     /**
@@ -89,14 +93,18 @@ public class PostController {
      * @return 
      */
     @GetMapping("/update/{postId}")
-    public String viewFormUpdate(@PathVariable("postId") int postId, Model model) {
-        Post post = postService.reviewExistentPost(postId);
-        if (post != null) {
-            model.addAttribute("post", post);
+    public String viewFormUpdate(@PathVariable("postId") int postId, Model model, HttpSession session) {
+        if ((int) session.getAttribute("userRolLogged") == 1) {
+            Post post = postService.reviewExistentPost(postId);
+            if (post != null) {
+                model.addAttribute("post", post);
+            } else {
+                log.warn("PostController / Post no encontrado con id: " + postId);
+            }
+            return "updatePost";
         } else {
-            log.warn("PostController / Post no encontrado con id: " + postId);
+            return "redirect:/home";
         }
-        return "updatePost";
     }
 
     /**

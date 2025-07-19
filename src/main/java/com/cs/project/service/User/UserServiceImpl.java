@@ -40,9 +40,9 @@ public class UserServiceImpl implements UserManageService, UserLoginService, Use
      * @return true si fue registrado con exito, false si ya existe un usuario registrado con datos unicos
      */
     @Override
-    public boolean userRegister(String name, String lastName, String email, String userName, String password) {
+    public boolean userRegister(String name, String lastName, String email, String userName, String password, int rol) {
         if (!verifyUserRegister(email, userName)) {
-            User user = new User(name, lastName, email, userName, password);
+            User user = new User(name, lastName, email, userName, password, rol);
             return userRepository.userRegister(user);
         } else {
             return false;
@@ -73,7 +73,7 @@ public class UserServiceImpl implements UserManageService, UserLoginService, Use
     @Override
     public boolean userUpdate(String name, String lastName, String email, String userName, String password, HttpSession session) {
         int userId = (Integer) session.getAttribute("userIdLogged");
-        User user = new User(name, lastName, email, userName, password);
+        User user = new User(name, lastName, email, userName, password, 1);
         return userRepository.updateUser(user, userId);
     }
 
@@ -88,8 +88,10 @@ public class UserServiceImpl implements UserManageService, UserLoginService, Use
     public boolean UserAuthenticate(String email, String password, HttpSession session) {
         log.info("SERVICE UserAuthenticate");
         int value = userRepository.findUser(email, password);
-        if (value >= 0) {
+        User user = userRepository.returnUser(value);
+        if (user != null) {
             session.setAttribute("userIdLogged", value);
+            session.setAttribute("userRolLogged", user.getRol());
             return true;
         } else {
             return false;

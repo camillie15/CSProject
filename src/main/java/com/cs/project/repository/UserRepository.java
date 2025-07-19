@@ -30,8 +30,8 @@ public class UserRepository {
      */
     public boolean userRegister(User user) {
         try {
-            String script = "INSERT INTO Users (name, lastName, email, username, password) VALUES (?,?,?,?,?)";
-            jdbcTemplate.update(script, user.getName(), user.getLastName(), user.getEmail(), user.getUserName(), user.getPassword());
+            String script = "INSERT INTO Users (name, lastName, email, username, password, rol) VALUES (?,?,?,?,?,?)";
+            jdbcTemplate.update(script, user.getName(), user.getLastName(), user.getEmail(), user.getUserName(), user.getPassword(), user.getRol());
             log.info("usuario actualizado");
             return true;
         } catch (DataAccessException e) {
@@ -56,6 +56,7 @@ public class UserRepository {
                 user.setEmail(rs.getString("email"));
                 user.setUserName(rs.getString("username"));
                 user.setPassword(rs.getString("password"));
+                user.setRol(rs.getInt("rol"));
                 return user;
             }, idUser);
         } catch (DataAccessException e) {

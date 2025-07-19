@@ -7,7 +7,8 @@ CREATE TABLE Users (
 	lastName VARCHAR(60),
 	email VARCHAR(60) UNIQUE,
 	username VARCHAR(60) UNIQUE,
-	password VARCHAR(60)
+	password VARCHAR(60),
+	rol INT
 );
 
 CREATE TABLE Posts (
