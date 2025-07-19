@@ -40,6 +40,7 @@ public class PostController {
         if ((int) session.getAttribute("userRolLogged") == 1) {
             Post post = new Post();
             model.addAttribute("post", post);
+            model.addAttribute("rol", (int) session.getAttribute("userRolLogged"));
             return "createPost";
         } else {
             return "redirect:/home";
@@ -98,6 +99,7 @@ public class PostController {
             Post post = postService.reviewExistentPost(postId);
             if (post != null) {
                 model.addAttribute("post", post);
+                model.addAttribute("rol", (int) session.getAttribute("userRolLogged"));
             } else {
                 log.warn("PostController / Post no encontrado con id: " + postId);
             }
