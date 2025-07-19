@@ -14,9 +14,15 @@
         <div th:replace="_fragments::header"></div>
         <main>
             <section id="section-post">
-                <div class="div-title-date">
-                    <h2 style="color: #88ccff;" th:text="${post.tittle}"></h2>
-                    <p class="p-date" th:text="${#temporals.format(post.createdDate, 'dd-MM-yyyy | HH:mm')}"></p>
+                <div class="div-title-date" style="justify-content: space-between;">
+                    <div style="display: flex; flex-direction: row; align-items: center; gap: 10px">
+                        <h2 style="color: #88ccff;" th:text="${post.tittle}"></h2>
+                        <p class="p-date" th:text="${#temporals.format(post.createdDate, 'dd-MM-yyyy | HH:mm')}"></p>
+                    </div>
+                    <form th:if="${rol eq 0}" th:action="@{'/post/' + 'delete/' + ${post.postId}}" method="POST">
+                        <button style="border:none; color: #E3170A; padding: 2px 6px ; border-bottom:2px solid #E3170A; background: none;
+                        border-radius: 2px; cursor: pointer" type="submit">Eliminar</button>
+                    </form>
                 </div>
                 <h3 th:text="${post.userName}"></h3>
                 <p th:text="${post.content}"></p>
@@ -38,6 +44,7 @@
                             <nav class="nav-action">
                                 <a class="btn-update" onclick="editComment(event)" id="edit-${comment.commentId}" th:data-comment-id="${comment.commentId}" th:data-user-id="${comment.userId}">Actualizar</a>
                                 <form th:action="@{'/comments/' + ${post.postId} + '/delete/' + ${comment.commentId}}" method="POST">
+                                    <input type="hidden" id="user-rol-logged" th:data-user-logged-rol="${rol}">
                                     <button class="btn-delete" type="submit" id="delete-${comment.commentId}" th:data-user-id="${comment.userId}">Eliminar</button>
                                 </form> 
                             </nav>
@@ -57,7 +64,7 @@
                     </div>
                     <div style="height: 2px; background: #2c3034; margin: 20px 40px 0 40px;" ></div>
                 </div>
-                <div id="div-form-comment">
+                <div th:if="${rol eq 1}" id="div-form-comment">
                     <form id="form-add-comment" th:action="@{/comments/{id}(id=${post.postId})}" th:object="${commentAdd}" method="POST">
                         <i class="bi bi-person-circle" id="icon-user"></i>
                         <input id="content" type="text" placeholder="Escribe un comentario" th:field="*{content}" maxlength="500">

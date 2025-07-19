@@ -180,6 +180,7 @@
 .btn-update.disabled, .btn-delete.disabled {
     opacity: 0.5;
     cursor: not-allowed;
+    display: none;
 
 }
 
