@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
     <head>
         <title>TODO supply a title</title>
         <meta charset="UTF-8">
@@ -15,8 +15,8 @@
             </a>
             
             <nav>
-                <a href="/createPost">Crear Post</a> 
-                <div class="separator"></div>
+                <a th:if="${rol eq 1}" href="/createPost">Crear Post</a>
+                <div th:if="${rol eq 1}" class="separator"></div>
                 <a href="/home">Inicio</a>
                 <div class="separator"></div>
                 <a href="/profile">Perfil</a>

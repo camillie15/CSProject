@@ -154,4 +154,22 @@
         align-items: stretch;
         justify-content: center;
     }
+
+    .header-card{
+        flex-direction: column;
+    }
+
+    .post-card{
+        margin: 20px 0;
+    }
+
+    .date-post-profile{
+        display: none;
+    }
+
+    .info-card{
+        & h2{
+            font-size: 1.2rem;
+        }
+    }
 }

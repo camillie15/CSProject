@@ -56,8 +56,8 @@
                 </form>
             </section>
 
-            <h2>Posts realizados</h2>
-            <section>
+            <h2 th:if="${rol eq 1}">Posts realizados</h2>
+            <section th:if="${rol eq 1}">
                 <div th:if="${posts.isEmpty()}">
                     <p style="color:#399af2">No hay comentarios aún.</p>
                 </div>
@@ -68,7 +68,7 @@
                             <a th:href="@{/comments/{postId}(postId=${post.postId})}">
                                 <h2 th:text="${post.tittle}"></h2>
                             </a>
-                            <p th:text="${#temporals.format(post.createdDate, 'dd-MM-yyyy | HH:mm')}"></p> 
+                            <p class="date-post-profile" th:text="${#temporals.format(post.createdDate, 'dd-MM-yyyy | HH:mm')}"></p>
                         </div>
 
                         <nav class="nav-action">
