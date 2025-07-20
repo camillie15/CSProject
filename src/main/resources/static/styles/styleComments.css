@@ -84,15 +84,9 @@
     }
 }
 
-#section-comments{
-    box-sizing: border-box;
-    padding: 20px;
-    width: 80%;
-    margin: auto;
-}
 
 .div-title-date{
-    width: 100%;
+/*    width: 100%;*/
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -109,40 +103,49 @@
     font-size: 0.9rem;
 }
 
-#div-form-comment{
 
-    & form{
-        box-sizing: border-box;
-        display: flex;
-        flex-direction: row;
-        gap: 10px;
-        width: 100%;
-        margin-top: 25px;
 
-        & input{
-            flex-grow: 1;
-        }
+#form-add-comment{
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    width: 100%;
+    margin-top: 25px;
 
-        & i{
-            font-size: 2.5rem;
-        }
+    & input{
+        flex-grow: 1;
+    }
+
+    & i{
+        font-size: 2.5rem;
     }
 }
 
+
 .div-comment{
+width: 100%;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
     margin-bottom: 20px;
 }
 
-.div-comment-data{
-    width: 90%;
+#section-comments{
+    width: 80%;
     box-sizing: border-box;
-    word-wrap: break-word;
-    display: grid;
-    grid-template-rows: auto auto;
+    margin: auto;
+}
+
+.div-comment-data{
+width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
     gap: 10px;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    hyphens: auto;
     margin: auto;
     & p{
         margin: 0;
@@ -199,4 +202,28 @@
     flex-direction: row;
     align-items: center;
     gap: 10px;
+}
+
+
+@media (width < 800px){
+    .bi-person-circle{
+        display:none;
+    }
+
+    #form-add-comment{
+        flex-direction: column;
+    }
+
+    #section-post{
+        width: 100%;
+    }
+
+    #section-comments{
+        width: 100%;
+    }
+
+    .div-comment-header{
+        flex-direction: column;
+    }
+
 }

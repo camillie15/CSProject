@@ -11,15 +11,15 @@
         <header th:fragment="header">
             <a href="/home" style="display: flex; gap:15px;">
                 <img src="../images/icon-logo.png" width="48" height="48" alt="alt"/>
-                <h1>VoxPopulity</h1>
+                <h1 class="logo-title">VoxPopulity</h1>
             </a>
             
             <nav>
-                <a th:if="${rol eq 1}" href="/createPost">Crear Post</a>
+                <a href="/createPost">Crear Post</a> 
                 <div class="separator"></div>
-                <a href="/home">Inicio</a>           
+                <a href="/home">Inicio</a>
                 <div class="separator"></div>
-                <a href="/profile">Mi perfil</a>
+                <a href="/profile">Perfil</a>
                 <div class="separator"></div>
                 <a class="logout" href="/logout"><i class="bi bi-box-arrow-right"></i> </a>
             </nav>

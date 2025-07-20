@@ -146,3 +146,12 @@
     font-weight: bold;
     color: #88ccff;
 }
+
+@media (width < 800px) {
+    .grid-form-user{
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: center;
+    }
+}

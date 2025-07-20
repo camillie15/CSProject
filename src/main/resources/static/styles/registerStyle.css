@@ -12,6 +12,10 @@ body {
     color: #f4f6fA;
 }
 
+main{
+margin-top: 15px;
+}
+
 button{
     box-sizing: border-box;
     font-size: 1rem;
@@ -55,16 +59,14 @@ input[type='text'], input[type='password'] {
     gap:15px;
 
     & div{
-        width: 90%;
+        width: 100%;
     }
-    
-    & .form-container-grid{
-        gap:15px;
-        place-items: center;
-        display: grid;
-        grid-template-columns: repeat(2,1fr);
-    }
-
+}
+.form-container-grid{
+    gap:15px;
+    place-items: center;
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
 }
 
 #btn-register{
@@ -112,4 +114,34 @@ header{
         }
     }
 
+}
+
+
+@media (width < 800px){
+    header div h1{
+        display: none;
+    }
+
+    .form-container-grid{
+        display: flex;
+        flex-direction: column;
+        justify-content: stretch;
+        align-items: stretch;
+
+        & div{
+            width: 100%;
+
+            & input{
+            width: 100;
+            }
+
+        }
+
+
+
+    }
+
+    #btn-register{
+        margin-bottom: 15px;
+    }
 }
