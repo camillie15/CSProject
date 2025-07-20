@@ -121,3 +121,9 @@ header{
     }
 
 }
+
+@media (width < 800px){
+    header div h1{
+        display: none;
+    }
+}

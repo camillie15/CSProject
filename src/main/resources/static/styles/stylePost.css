@@ -10,6 +10,7 @@
     padding: 30px;
     flex-direction: column;
     & textArea{
+        box-sizing:border-box;
         width: 100%;
         resize: none;
         height: 100px;
@@ -24,14 +25,15 @@
     }
 }
 
+input[type='text']{
+    box-sizing:border-box;
+    width: 65%;
+}
+
 #form-post {
     display: flex;
     flex-direction: column;
     gap: 10px;
-
-    & input[type='text']{
-        width: 40%;
-    }
 
     & button{
         width: fit-content;
@@ -78,4 +80,14 @@
     flex-direction: row;
     align-items: center;
     gap: 10px;
+}
+
+@media (width < 800px) {
+    #section-post{
+        width: auto;
+    }
+
+    #tittle{
+        width: 100%;
+    }
 }

@@ -4,7 +4,7 @@
 */
 #section-posts{
     box-sizing: border-box;
-    width: 70%;
+    width: 80%;
     gap: 10px;
     margin: auto;
 
@@ -62,8 +62,12 @@
     }
 }
 
-.p-date{
+    h3{
     font-size: 0.9rem;
+    }
+
+.p-date{
+    font-size: 0.8rem;
 }
 
 .div-options-post{
@@ -81,4 +85,21 @@
 .div-option{
     width: 50%;
     text-align: center;
+}
+
+@media (width < 800px) {
+    #section-posts{
+        box-sizing: border-box;
+        width: 100%;
+        gap: 10px;
+    }
+
+    h2{
+    font-size: 1.1rem;
+    }
+
+    h3{
+    font-size: 0.7rem;
+    }
+
 }
